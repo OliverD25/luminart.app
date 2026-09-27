@@ -49,5 +49,6 @@ mkdirSync(dist, { recursive: true });
 for (const entry of readdirSync(dist)) rmSync(join(dist, entry), { recursive: true, force: true });
 writeFileSync(join(dist, 'index.html'), page);
 cpSync(join(src, 'styles.css'), join(dist, 'styles.css'));
+cpSync(join(src, 'static'), dist, { recursive: true });
 
 console.log(`Built dist/ with ${products.length} product(s).`);

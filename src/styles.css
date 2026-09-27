@@ -214,6 +214,16 @@ img.shot { display: block; width: 100%; object-fit: cover; }
   color: var(--faint);
 }
 
+.not-found {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  min-height: 100vh;
+  padding: 48px;
+}
+
+.back { font-size: 14px; color: var(--muted); }
+
 @media (max-width: 1240px) {
   .card { grid-template-columns: minmax(0, 1fr); }
   .shot { order: -1; height: 160px; }
@@ -235,4 +245,5 @@ img.shot { display: block; width: 100%; object-fit: cover; }
   .card { padding: 24px; }
   .card h2 { font-size: 28px; }
   .shot { height: 140px; }
+  .not-found { padding: 28px 24px 32px; }
 }
