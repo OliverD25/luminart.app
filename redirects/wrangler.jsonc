@@ -1,0 +1,31 @@
+// Each product subdomain is its own Worker, named "luminart-<label>" (telemetrix.luminart.app is
+// "luminart-telemetrix"). Until a product has a site of its own, its Worker is this redirect.
+// A real product site can later be deployed under the same Worker name and simply replaces it.
+// "vars" are not inherited from the top level, so every environment sets its own.
+{
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  "name": "luminart-redirect",
+  "main": "worker.js",
+  "compatibility_date": "2026-09-01",
+  "workers_dev": false,
+  "env": {
+    "www": {
+      "name": "luminart-www",
+      "routes": [{ "pattern": "www.luminart.app", "custom_domain": true }],
+      "vars": {
+        "TARGET": "https://luminart.app",
+        "STATUS": "301",
+        "KEEP_PATH": "true"
+      }
+    },
+    "telemetrix": {
+      "name": "luminart-telemetrix",
+      "routes": [{ "pattern": "telemetrix.luminart.app", "custom_domain": true }],
+      "vars": {
+        "TARGET": "https://github.com/OliverD25/telemetrix",
+        "STATUS": "302",
+        "KEEP_PATH": "false"
+      }
+    }
+  }
+}
