@@ -1,4 +1,4 @@
-import { cpSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { cpSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const root = join(import.meta.dirname, '..');
@@ -43,8 +43,10 @@ const page = readFileSync(join(src, 'template.html'), 'utf8').replace(/\{\{(\w+)
   return values[key];
 });
 
-rmSync(dist, { recursive: true, force: true });
-mkdirSync(dist);
+// Empty dist/ rather than delete it: on Windows, `wrangler dev` holds the watched folder open,
+// so removing the folder itself fails with EPERM on every rebuild.
+mkdirSync(dist, { recursive: true });
+for (const entry of readdirSync(dist)) rmSync(join(dist, entry), { recursive: true, force: true });
 writeFileSync(join(dist, 'index.html'), page);
 cpSync(join(src, 'styles.css'), join(dist, 'styles.css'));
 
