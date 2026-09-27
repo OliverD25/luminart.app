@@ -1,0 +1,28 @@
+[
+  {
+    "name": "Telemetrix",
+    "subdomain": "telemetrix.luminart.app",
+    "href": "https://telemetrix.luminart.app",
+    "description": "A very light terminal screensaver and live system dashboard for Windows 11 and Linux. CPU, memory, disks and temperatures, plus Lua plugin cards, in about 8 MB of memory.",
+    "cta": "Open Telemetrix →",
+    "screenshot": {
+      "type": "text",
+      "lines": [
+        "╭ CPU ──────────────────────────╮",
+        "│ █████░░░░░░░░░░░░░░░░░░   23% │",
+        "│ temp                  52.0 °C │",
+        "│ ▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▂▃▃▃▃▃▃▃▃▃▃▃▃▃ │",
+        "╰───────────────────────────────╯",
+        "╭ RAM ──────────────────────────╮",
+        "│ used      18.3 GiB / 64.0 GiB │",
+        "│ ███████░░░░░░░░░░░░░░░░   29% │",
+        "│ ▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃ │",
+        "╰───────────────────────────────╯",
+        "╭ Swap ─────────────────────────╮",
+        "│ used      512.0 MiB / 8.0 GiB │",
+        "│ █░░░░░░░░░░░░░░░░░░░░░░    6% │",
+        "╰───────────────────────────────╯"
+      ]
+    }
+  }
+]

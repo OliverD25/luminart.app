@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Luminart</title>
+<meta name="description" content="Thoughtfully crafted tools for everyday tasks and creative flow.">
+<link rel="canonical" href="https://luminart.app/">
+<meta name="theme-color" content="#0c0b10" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f6f5f8" media="(prefers-color-scheme: light)">
+<meta property="og:title" content="Luminart">
+<meta property="og:description" content="Thoughtfully crafted tools for everyday tasks and creative flow.">
+<meta property="og:url" content="https://luminart.app/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Luminart">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="/icons/luminart-icon.svg" type="image/svg+xml">
+<link rel="icon" href="/icons/favicon-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="/icons/favicon-180.png">
+<link rel="manifest" href="/site.webmanifest">
+<script>
+  {
+    let saved = null;
+    try { saved = localStorage.getItem('luminart-theme'); } catch {}
+    if (saved === 'light' || (!saved && matchMedia('(prefers-color-scheme: light)').matches)) {
+      document.documentElement.dataset.theme = 'light';
+    }
+  }
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&family=DM+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<div class="page">
+  <header class="brand">
+    <div class="brand-top">
+      <div class="brand-bar">
+        <a class="logo" href="/"><svg width="22" height="22" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#0c0b10"/><rect x="20" y="16" width="8" height="32" rx="2" fill="#e6e4ec"/><rect x="20" y="40" width="26" height="8" rx="2" fill="#e6e4ec"/><circle cx="43" cy="21" r="5" fill="#c9a6ff"/></svg>Luminart</a>
+        <button class="theme-toggle" type="button" aria-label="Toggle color theme">Dark</button>
+      </div>
+      <h1>Thoughtfully crafted tools for everyday tasks and creative flow</h1>
+      <p class="blurb">An independent studio creating deeply focused tools—built to master their jobs and stay out of your way</p>
+    </div>
+    <div class="brand-bottom">
+      <div class="links"><a href="https://github.com/OliverD25" target="_blank" rel="noopener">GitHub</a></div>
+      <span class="copyright">© {{year}} Luminart</span>
+    </div>
+  </header>
+  <main class="products">
+    <div class="products-head"><span>Products</span><span>{{count}}</span></div>
+    <div class="grid" style="--rows: {{rows}}">
+{{products}}
+    </div>
+  </main>
+</div>
+<script>
+  {
+    const root = document.documentElement;
+    const toggle = document.querySelector('.theme-toggle');
+    const showLabel = () => {
+      toggle.textContent = root.dataset.theme === 'light' ? 'Light' : 'Dark';
+    };
+    toggle.addEventListener('click', () => {
+      const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+      if (next === 'light') root.dataset.theme = 'light';
+      else delete root.dataset.theme;
+      try { localStorage.setItem('luminart-theme', next); } catch {}
+      showLabel();
+    });
+    showLabel();
+  }
+</script>
+</body>
+</html>
