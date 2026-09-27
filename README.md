@@ -49,6 +49,16 @@ be in the same Cloudflare account.
 `301` is a permanent redirect: browsers and search engines remember it. `302` is a temporary
 redirect: nothing remembers it, so it is safe to change later.
 
+## Preview a change before publishing
+
+```bash
+npx wrangler versions upload
+```
+
+This builds and uploads the site as a new version that is **not** live, and prints a
+`Version Preview URL` like `https://02977f20-luminart-site.muzexp.workers.dev`. Open it, share it,
+or check it with the command below. When it looks right, run `npm run deploy` to publish.
+
 To check a preview URL instead of the live domains, give it as the first argument. Then only the
 two main-site checks run:
 

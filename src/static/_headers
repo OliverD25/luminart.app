@@ -3,3 +3,7 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
   X-Frame-Options: DENY
+
+# The workers.dev copy exists only for preview URLs; keep search engines on luminart.app.
+https://luminart-site.muzexp.workers.dev/*
+  X-Robots-Tag: noindex
