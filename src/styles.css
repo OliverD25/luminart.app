@@ -201,7 +201,7 @@ img.shot { display: block; width: 100%; object-fit: cover; }
   overflow: hidden;
   background: var(--ph1);
   border: 1px solid var(--line);
-  font-family: 'DM Mono', monospace;
+  font-family: 'DM Mono', 'JetBrains Mono', monospace;
   font-size: 12px;
   line-height: 1.35;
 }
@@ -227,6 +227,12 @@ img.shot { display: block; width: 100%; object-fit: cover; }
 @media (max-width: 1240px) {
   .card { grid-template-columns: minmax(0, 1fr); }
   .shot { order: -1; height: 160px; }
+  /* The short slot cannot fit the whole render: start from its first line and fade out the cut. */
+  .shot-text {
+    align-items: flex-start;
+    padding-top: 12px;
+    mask-image: linear-gradient(#000 55%, transparent);
+  }
 }
 
 @media (max-width: 900px) {

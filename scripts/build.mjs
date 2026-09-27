@@ -31,6 +31,13 @@ const renderCard = (product) => `      <a class="card" href="${escapeHtml(produc
       </a>`;
 
 const products = JSON.parse(readFileSync(join(src, 'products.json'), 'utf8'));
+const required = ['name', 'subdomain', 'href', 'description', 'cta'];
+for (const product of products) {
+  const missing = required.filter((key) => typeof product[key] !== 'string' || product[key] === '');
+  if (missing.length > 0) {
+    throw new Error(`Product "${product.name ?? '?'}" in src/products.json is missing: ${missing.join(', ')}`);
+  }
+}
 const values = {
   year: String(new Date().getFullYear()),
   count: String(products.length).padStart(2, '0'),
