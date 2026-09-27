@@ -13,7 +13,7 @@ Where things are:
 - [src/products.json](src/products.json): the product list.
 - [src/static/](src/static/): files copied into `dist/` unchanged (icons, 404 page, `_headers`,
   `robots.txt`, `sitemap.xml`, `site.webmanifest`).
-- [scripts/build.mjs](scripts/build.mjs): deletes `dist/` and builds it again.
+- [scripts/build.mjs](scripts/build.mjs): empties `dist/` and builds it again.
 - [scripts/verify.mjs](scripts/verify.mjs): checks the live site and the redirects after a deploy.
 - [wrangler.jsonc](wrangler.jsonc): Cloudflare settings for the main site (Worker `luminart-site`).
 - [redirects/](redirects/): one small redirect Worker, deployed once per subdomain.
