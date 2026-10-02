@@ -10,7 +10,7 @@ Usage:
 Writes, overwriting what is there:
     sites/<label>/public/images/<name>.webp   hero 1600 wide, the others 1200 wide
     sites/<label>/public/images/og.jpg        1200x630 from the hero, for link previews
-    src/static/images/<label>.webp            560x350 crop of the hero, the card on luminart.app
+    src/static/images/<label>.webp            the whole hero at 1120 wide, the card on luminart.app
 
 Needs Pillow (python -m pip install pillow). Keeps the aspect ratio of every image;
 the page's CSS frames assume 1920x1020 windows, so crop screenshots to the window.
@@ -59,9 +59,8 @@ for src in sources:
     report(out, page)
 
     if is_hero:
-        w, h = image.size
-        crop_w = min(w, round(h * 1.6))
-        card = image.crop((0, 0, crop_w, round(crop_w / 1.6))).resize((560, 350), Image.LANCZOS)
+        # The card slot is 280px wide on the main page; the whole window at 2x stays crisp.
+        card = scaled(image, 1120)
         out = card_images / f"{label}.webp"
         card.save(out, "WEBP", quality=82, method=6)
         report(out, card)

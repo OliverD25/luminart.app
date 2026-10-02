@@ -187,7 +187,15 @@ h1 {
   border-radius: 8px;
 }
 
-img.shot { display: block; width: 100%; object-fit: cover; }
+/* A picture keeps its own shape on the wide layout: the whole window, not a zoomed crop. */
+img.shot {
+  display: block;
+  width: 100%;
+  height: auto;
+  align-self: center;
+  border: 1px solid var(--line);
+  background: var(--panel);
+}
 
 .shot-text,
 .shot-placeholder {
@@ -224,9 +232,18 @@ img.shot { display: block; width: 100%; object-fit: cover; }
 
 .back { font-size: 14px; color: var(--muted); }
 
+/* A whole-window picture needs more width than the design's 280px slot to be readable. */
+@media (min-width: 1241px) {
+  .card { grid-template-columns: minmax(0, 1fr) 400px; }
+}
+@media (min-width: 1700px) {
+  .card { grid-template-columns: minmax(0, 1fr) 520px; }
+}
+
 @media (max-width: 1240px) {
   .card { grid-template-columns: minmax(0, 1fr); }
   .shot { order: -1; height: 160px; }
+  img.shot { height: 160px; object-fit: cover; object-position: top; }
   /* The short slot cannot fit the whole render: start from its first line and fade out the cut. */
   .shot-text {
     align-items: flex-start;
