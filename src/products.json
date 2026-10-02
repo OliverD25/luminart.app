@@ -1,5 +1,13 @@
 [
   {
+    "name": "CabinetOS",
+    "subdomain": "cabinetos.luminart.app",
+    "href": "https://cabinetos.luminart.app",
+    "description": "A dual-pane file manager for Windows 11 with a command palette, chord keys, an integrated terminal and sandboxed plugins. A Rust core does the work; the window only draws.",
+    "cta": "Open CabinetOS →",
+    "screenshot": null
+  },
+  {
     "name": "Telemetrix",
     "subdomain": "telemetrix.luminart.app",
     "href": "https://telemetrix.luminart.app",

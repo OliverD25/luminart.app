@@ -1,18 +1,30 @@
-// Post-deploy checks. With a base URL argument (for example a preview URL), only the two
-// main-site checks run against that base.
+// Post-deploy checks. With a base URL argument (for example a preview URL), only two checks run
+// against that base: the home page and a missing page. The cabinetos site passes the same two
+// checks, so `node scripts/verify.mjs <url>` also works for a preview of it. That is why the home
+// page may then carry either title.
 const base = process.argv[2]?.replace(/\/+$/, '');
 const site = base ?? 'https://luminart.app';
 
 const checks = [
-  { url: `${site}/`, status: 200, body: '<title>Luminart</title>', headers: { 'x-content-type-options': 'nosniff' } },
+  {
+    url: `${site}/`,
+    status: 200,
+    body: base ? ['<title>Luminart</title>', '<title>CabinetOS'] : '<title>Luminart</title>',
+    headers: { 'x-content-type-options': 'nosniff' },
+  },
   { url: `${site}/this-page-does-not-exist`, status: 404 },
 ];
 if (!base) {
   checks.push(
     { url: 'https://www.luminart.app/a/b?c=1', status: 301, headers: { location: 'https://luminart.app/a/b?c=1' } },
     { url: 'https://telemetrix.luminart.app/', status: 302, headers: { location: 'https://github.com/OliverD25/telemetrix' } },
+    { url: 'https://cabinetos.luminart.app/', status: 200, body: '<title>CabinetOS', headers: { 'x-content-type-options': 'nosniff' } },
+    { url: 'https://cabinetos.luminart.app/this-page-does-not-exist', status: 404 },
   );
 }
+
+// A check's body is one string, or a list of which the page must contain at least one.
+const accepted = (body) => [body ?? []].flat();
 
 async function problemsOf({ url, status, body, headers = {} }) {
   let response;
@@ -25,7 +37,8 @@ async function problemsOf({ url, status, body, headers = {} }) {
   }
   const problems = [];
   if (response.status !== status) problems.push(`status ${response.status}, expected ${status}`);
-  if (body && !text.includes(body)) problems.push(`body does not contain ${body}`);
+  const wanted = accepted(body);
+  if (wanted.length > 0 && !wanted.some((part) => text.includes(part))) problems.push(`body does not contain ${wanted.join(' or ')}`);
   for (const [name, expected] of Object.entries(headers)) {
     const actual = response.headers.get(name);
     if (actual !== expected) problems.push(`${name} is ${actual ?? 'missing'}, expected ${expected}`);
@@ -34,7 +47,7 @@ async function problemsOf({ url, status, body, headers = {} }) {
 }
 
 const describe = ({ status, body, headers = {} }) =>
-  [status, body, ...Object.entries(headers).map(([name, value]) => `${name}: ${value}`)].filter(Boolean).join(', ');
+  [status, accepted(body).join(' or '), ...Object.entries(headers).map(([name, value]) => `${name}: ${value}`)].filter(Boolean).join(', ');
 
 let failed = 0;
 for (const check of checks) {
