@@ -17,7 +17,7 @@ highlights:
 
 Two file panes side by side, or one at a keystroke. Each pane has back, forward and up, pinned folders, and the drives with their free space.
 
-![Two panes side by side, the sidebar with pinned folders and drives](media/hero.webp)
+![Two panes side by side, each with its tabs, breadcrumbs and column headers](media/hero.webp)
 
 ### Tabs and path
 
