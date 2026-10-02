@@ -19,6 +19,8 @@ Colors, type, spacing and breakpoints there are final; product data is not.
   redirect-only hostname (`www`, `telemetrix`). Each is its own Worker named
   `luminart-<label>`.
 - `scripts/verify.mjs` — live checks after a deploy (`npm run verify`).
+- `sites/<label>/` — one static product page each (own Worker `luminart-<label>`, no build
+  step). `cabinetos` is not live yet: README, "Product pages".
 
 ## Rules
 
