@@ -5,15 +5,17 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "dev": "wrangler dev --port 8787",
-    "dev:cabinetos": "wrangler dev -c sites/cabinetos/wrangler.jsonc --port 8788",
+    "build:releases": "node scripts/build-releases.mjs",
+    "dev:cabinetos": "npm run build:releases && wrangler dev -c sites/cabinetos/wrangler.jsonc --port 8788",
     "deploy": "wrangler deploy",
     "deploy:www": "wrangler deploy -c redirects/wrangler.jsonc -e www",
     "deploy:telemetrix": "wrangler deploy -c redirects/wrangler.jsonc -e telemetrix",
-    "deploy:cabinetos": "wrangler deploy -c sites/cabinetos/wrangler.jsonc",
+    "deploy:cabinetos": "npm run build:releases && wrangler deploy -c sites/cabinetos/wrangler.jsonc",
     "deploy:all": "npm run deploy && npm run deploy:www && npm run deploy:telemetrix && npm run deploy:cabinetos",
     "verify": "node scripts/verify.mjs"
   },
   "devDependencies": {
+    "marked": "18.0.14",
     "wrangler": "^4"
   }
 }

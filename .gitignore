@@ -4,3 +4,4 @@ dist/
 .screenshots/
 .dev.vars
 *.log
+sites/cabinetos/public/releases/
