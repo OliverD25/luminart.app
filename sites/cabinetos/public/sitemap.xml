@@ -3,4 +3,10 @@
   <url>
     <loc>https://cabinetos.luminart.app/</loc>
   </url>
+  <url>
+    <loc>https://cabinetos.luminart.app/releases/</loc>
+  </url>
+  <url>
+    <loc>https://cabinetos.luminart.app/releases/0.1.0/</loc>
+  </url>
 </urlset>
