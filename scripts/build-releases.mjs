@@ -290,6 +290,7 @@ const renderBar = (current) => `  <header class="bar">
 const renderFooter = () => `  <footer>
     <span class="copyright">© ${new Date().getFullYear()} Luminart</span>
     <div class="links">
+      <a href="mailto:redrickcarter39@gmail.com">redrickcarter39@gmail.com</a>
       <a href="https://luminart.app/">luminart.app</a>
       <a href="https://github.com/OliverD25" target="_blank" rel="noopener">GitHub</a>
     </div>

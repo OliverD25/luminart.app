@@ -20,6 +20,10 @@ Where things are:
 - [sites/](sites/): one folder per product page, each a static site with its own Worker
   (see "Product pages").
 
+## Contact
+
+Questions and ideas: redrickcarter39@gmail.com, or an issue on GitHub.
+
 ## Build and preview
 
 Run the commands in the repository folder. You need Node 24.
