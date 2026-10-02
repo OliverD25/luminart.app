@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CabinetOS — Modern System Commander</title>
+<meta name="description" content="A dual-pane file manager for Windows 11 with a command palette, chord keys, an integrated terminal and sandboxed plugins. Rust core, WinUI 3 window, MIT license.">
+<link rel="canonical" href="https://cabinetos.luminart.app/">
+<meta name="theme-color" content="#0c0b10">
+<meta property="og:title" content="CabinetOS — Modern System Commander">
+<meta property="og:description" content="A dual-pane file manager for Windows 11 with a command palette, chord keys, an integrated terminal and sandboxed plugins. Rust core, WinUI 3 window, MIT license.">
+<meta property="og:url" content="https://cabinetos.luminart.app/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Luminart">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="/icons/cabinetos.svg" type="image/svg+xml">
+<link rel="icon" href="/icons/cabinetos-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="/icons/cabinetos-256.png">
+<script>
+  {
+    let saved = null;
+    try { saved = localStorage.getItem('luminart-theme'); } catch {}
+    if (saved === 'light' || (!saved && matchMedia('(prefers-color-scheme: light)').matches)) {
+      document.documentElement.dataset.theme = 'light';
+      document.querySelector('meta[name="theme-color"]').content = '#f6f5f8';
+    }
+  }
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&family=DM+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="/page.css">
+</head>
+<body>
+<div class="page">
+  <header class="bar">
+    <a class="logo" href="https://luminart.app/"><svg width="22" height="22" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#0c0b10"/><rect x="20" y="16" width="8" height="32" rx="2" fill="#e6e4ec"/><rect x="20" y="40" width="26" height="8" rx="2" fill="#e6e4ec"/><circle cx="43" cy="21" r="5" fill="#c9a6ff"/></svg>Luminart</a>
+    <button class="theme-toggle" type="button" aria-label="Toggle color theme">Dark</button>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="kicker">Luminart product</p>
+        <h1>CabinetOS</h1>
+        <p class="subtitle">Modern System Commander</p>
+        <p class="lead">An approachable, high-performance file manager for Windows 11. The dual-pane efficiency of Total Commander, with the workspace ideas of VS Code: a command palette, chord keys, an integrated terminal and sandboxed plugins.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="https://github.com/OliverD25/cabinetos/releases/latest/download/CabinetOS-0.1.0-win-x64-setup.exe">Download for Windows</a>
+          <a class="btn" href="https://github.com/OliverD25/cabinetos" target="_blank" rel="noopener">Source on GitHub</a>
+        </div>
+        <p class="meta">Version 0.1.0 · Windows 11, x64 · setup file, about 44 MB · MIT license</p>
+        <p class="note">First release. Not code-signed yet, so Windows SmartScreen asks once before the first start.</p>
+      </div>
+      <img class="app-icon" src="/icons/cabinetos.svg" alt="CabinetOS icon" width="112" height="112">
+    </section>
+    <section class="shot">
+      <h2 class="visually-hidden">Screenshot</h2>
+      <div class="window">
+        <!-- Once the screenshot exists, replace the placeholder below with:
+        <img src="/images/hero.png" alt="CabinetOS: two file panes, the sidebar with pinned folders and drives, and the command palette" width="1600" height="1000" loading="eager">
+        -->
+        <div class="placeholder">screenshot</div>
+      </div>
+    </section>
+    <section class="features">
+      <h2 class="label">What works in 0.1.0</h2>
+      <ul class="grid">
+        <li class="card">
+          <h3>Two panes, tabs, columns</h3>
+          <p>Two file panes with tabs, breadcrumbs, pinned folders and the drives. A column view like Finder's. Listings of 100,000 entries in about 50 ms.</p>
+        </li>
+        <li class="card">
+          <h3>Queues with undo</h3>
+          <p>Copy, move, delete and rename run on per-disk queues. A conflict never stops the rest of a job, and there is undo.</p>
+        </li>
+        <li class="card">
+          <h3>Search a whole volume</h3>
+          <p>Search by name across whole NTFS volumes through an optional indexer, or by walking the folders without it.</p>
+        </li>
+        <li class="card">
+          <h3>Everything is a command</h3>
+          <p>Every action is a named command with a shortcut, reachable from a command palette, with chord keys. The mouse is optional.</p>
+        </li>
+        <li class="card">
+          <h3>A terminal in a dock</h3>
+          <p>PowerShell, Command Prompt or WSL, each linked to a file pane and following it.</p>
+        </li>
+        <li class="card">
+          <h3>Themes and one settings file</h3>
+          <p>Colour themes in JSON and one settings file, cabinetos.json, both applied live.</p>
+        </li>
+        <li class="card">
+          <h3>Plugins in a sandbox</h3>
+          <p>WebAssembly plugins with capabilities, and Tool Extensions in dockable panes, installed from a marketplace. Every download is checked by its SHA-256.</p>
+        </li>
+        <li class="card">
+          <h3>Light on the system</h3>
+          <p>A Rust core does the work; the window only draws pixels and reads listings from shared memory. A setup file, and updates that install themselves.</p>
+        </li>
+      </ul>
+    </section>
+    <section class="status">
+      <h2 class="label">Not there yet</h2>
+      <p>0.1.0 is an early release. Still missing: code signing (so Windows SmartScreen asks before the first start), a graphical settings view, ARM64, and a winget package.</p>
+      <a class="more" href="https://github.com/OliverD25/cabinetos/blob/main/CHANGELOG.md" target="_blank" rel="noopener">What each version adds →</a>
+    </section>
+  </main>
+  <footer>
+    <span class="copyright">© 2026 Luminart</span>
+    <div class="links">
+      <a href="https://luminart.app/">luminart.app</a>
+      <a href="https://github.com/OliverD25" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </footer>
+</div>
+<script>
+  {
+    const root = document.documentElement;
+    const toggle = document.querySelector('.theme-toggle');
+    const showLabel = () => {
+      toggle.textContent = root.dataset.theme === 'light' ? 'Light' : 'Dark';
+    };
+    toggle.addEventListener('click', () => {
+      const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+      if (next === 'light') root.dataset.theme = 'light';
+      else delete root.dataset.theme;
+      document.querySelector('meta[name="theme-color"]').content = next === 'light' ? '#f6f5f8' : '#0c0b10';
+      try { localStorage.setItem('luminart-theme', next); } catch {}
+      showLabel();
+    });
+    showLabel();
+  }
+</script>
+</body>
+</html>

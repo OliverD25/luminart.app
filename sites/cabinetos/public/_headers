@@ -1,0 +1,9 @@
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  X-Frame-Options: DENY
+
+# The workers.dev copy exists only for previews; keep search engines on cabinetos.luminart.app.
+https://luminart-cabinetos.muzexp.workers.dev/*
+  X-Robots-Tag: noindex
