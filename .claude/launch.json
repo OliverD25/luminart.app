@@ -4,8 +4,26 @@
     {
       "name": "site",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["wrangler", "dev", "--port", "8787"],
+      "runtimeArgs": [
+        "wrangler",
+        "dev",
+        "--port",
+        "8787"
+      ],
       "port": 8787
+    },
+    {
+      "name": "cabinetos",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "wrangler",
+        "dev",
+        "-c",
+        "sites/cabinetos/wrangler.jsonc",
+        "--port",
+        "8788"
+      ],
+      "port": 8788
     }
   ]
 }
