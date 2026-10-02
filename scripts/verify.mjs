@@ -20,6 +20,8 @@ if (!base) {
     { url: 'https://telemetrix.luminart.app/', status: 302, headers: { location: 'https://github.com/OliverD25/telemetrix' } },
     { url: 'https://cabinetos.luminart.app/', status: 200, body: '<title>CabinetOS', headers: { 'x-content-type-options': 'nosniff' } },
     { url: 'https://cabinetos.luminart.app/this-page-does-not-exist', status: 404 },
+    { url: 'https://cabinetos.luminart.app/releases/', status: 200, body: '<title>Releases' },
+    { url: 'https://cabinetos.luminart.app/releases/0.1.0/', status: 200, body: "What's new in 0.1.0" },
   );
 }
 

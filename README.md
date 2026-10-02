@@ -124,7 +124,8 @@ A product can have a page of its own. It is a separate static site in `sites/<la
 Worker named `luminart-<label>`. `sites/cabinetos/` is the first one.
 
 - `public/` holds plain files: HTML, `page.css`, icons, `404.html`, `robots.txt`, `sitemap.xml` and
-  its own `_headers`. There is no build step. Cloudflare serves the folder as it is.
+  its own `_headers`. Cloudflare serves the folder as it is. The only generated part is
+  `public/releases/` (see "Release notes").
 - `page.css` is a copy of the main site's colours, fonts and breakpoints. Nothing is imported across
   sites, so each site can change and deploy on its own.
 - The year in the footer of `public/index.html` is typed by hand. Change it every January.
@@ -161,3 +162,54 @@ For another product page, copy `sites/cabinetos/` to `sites/<label>/` and change
 the hostnames inside the files. Add `dev:<label>` and `deploy:<label>` scripts to `package.json`, and
 the page's two checks to `scripts/verify.mjs`. Give the dev script its own port (8788 is CabinetOS;
 never use 8080).
+
+### Release notes
+
+The CabinetOS site has a "What's new in <version>" page for every release, in the style of VS Code's
+release notes. Each release is written as files in `sites/cabinetos/releases/<version>/`:
+
+- `notes.md`: front matter, then the notes in markdown.
+- `media/`: the images and short videos that `notes.md` shows.
+
+Front matter (between two `---` lines). The build stops with the file name and line on a missing key:
+
+```
+---
+version: 0.1.0
+date: 2026-09-30
+summary: One sentence for the list and the link preview.
+download: CabinetOS-0.1.0-win-x64-setup.exe
+highlights:
+  - Three to six short lines
+  - that open the page
+  - in a Highlights card
+---
+```
+
+- `version` is `MAJOR.MINOR.PATCH` and must match the folder name. `date` is `YYYY-MM-DD`.
+- `download` is the file name of the release asset. The page links to
+  `https://github.com/OliverD25/cabinetos/releases/download/v<version>/<download>`.
+- `title` is optional. The default is `What's new in <version>`.
+
+The body uses `##` for sections, `###` for features, and normal markdown: paragraphs, bullet lists,
+bold, inline code and links. Every `##` and `###` gets an id, and the `##` headings fill the
+"On this page" list.
+
+A media line is `![caption](media/<file>)` alone on a line, with an empty line before and after.
+The file must exist in `media/`. A `.mp4` or `.webm` file becomes a looping, muted `<video>`. A
+`.png`, `.webp`, `.gif` or `.jpg` file becomes an `<img loading="lazy">`. Both become a
+`<figure class="media">` with the caption, framed like the screenshots on the product page. Any other
+type is an error. The first `.png`, `.webp` or `.jpg` of the notes is also the link preview image
+of the page.
+
+```bash
+npm run build:releases     # writes public/releases/ and rewrites public/sitemap.xml
+npm run dev:cabinetos      # builds the releases, then serves http://localhost:8788
+npm run deploy:cabinetos   # builds the releases, then publishes
+```
+
+`scripts/build-releases.mjs` uses the `marked` package and Node's own modules. It lists the releases
+newest first (compared as numbers, so 0.10.0 is newer than 0.9.0). It empties and fills only
+`public/releases/`, which is generated and ignored by git: never edit it by hand. It also rewrites
+`public/sitemap.xml` with the product page, `/releases/` and every release page.
+

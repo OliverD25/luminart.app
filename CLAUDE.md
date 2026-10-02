@@ -22,6 +22,8 @@ Colors, type, spacing and breakpoints there are final; product data is not.
 - `sites/<label>/` — one static product page each (own Worker `luminart-<label>`, no build
   step). `cabinetos` is live. How to add one, and the two-step go-live: README,
   "Product pages". Screenshots are prepared with `scripts/prep-shots.py`.
+  CabinetOS release notes (`sites/cabinetos/releases/<version>/notes.md`) are built into
+  `public/releases/` by `npm run build:releases`: README, "Release notes". Never edit that folder.
 
 ## Rules
 
