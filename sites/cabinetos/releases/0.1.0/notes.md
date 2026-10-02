@@ -1,11 +1,11 @@
 ---
 version: 0.1.0
-date: 2026-09-30
-summary: The first release: two panes, a column view, copy queues per disk, search, a command palette, a terminal that follows its pane, themes and sandboxed plugins.
+date: 2026-10-02
+summary: The first release: two panes, a column view, copy queues per disk with undo, search, a command palette, a terminal that follows its pane, themes and sandboxed plugins.
 download: CabinetOS-0.1.0-win-x64-setup.exe
 highlights:
   - Two file panes with tabs, breadcrumbs and a column view
-  - One copy queue per disk, with pause, resume and cancel
+  - One copy queue per disk, with pause, resume, cancel and undo
   - A command palette with chord keys
   - An integrated terminal that follows its pane
   - Themes, one settings file, and sandboxed plugins
@@ -56,6 +56,10 @@ There is one copy queue per physical disk: one job at a time on a hard disk, sev
 ### Conflicts stop only one file
 
 A file conflict pauses only that file. You can skip it, replace it, or copy it under a new name, once or for every conflict of its kind.
+
+### Undo
+
+Every job that changed something writes one line to an undo journal when it ends, and an undo reverses that job as a new job: `cab undo --last` in a terminal takes back the last one.
 
 ### Open and Properties
 
