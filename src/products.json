@@ -5,7 +5,7 @@
     "href": "https://cabinetos.luminart.app",
     "description": "A dual-pane file manager for Windows 11 with a command palette, chord keys, an integrated terminal and sandboxed plugins. A Rust core does the work; the window only draws.",
     "cta": "Open CabinetOS →",
-    "screenshot": null
+    "screenshot": { "type": "image", "src": "/images/cabinetos.webp", "alt": "CabinetOS: the sidebar and the first of two file panes" }
   },
   {
     "name": "Telemetrix",

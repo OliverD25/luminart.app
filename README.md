@@ -134,28 +134,28 @@ npm run dev:cabinetos      # serves the page at http://localhost:8788
 npm run deploy:cabinetos   # publishes the Worker luminart-cabinetos
 ```
 
-The hostname `cabinetos.luminart.app` is not attached yet. This is on purpose: the screenshots come
-first. Until then the page answers only at `https://luminart-cabinetos.muzexp.workers.dev`, and that
-copy tells search engines to stay away.
+Going live happens in two steps, so a page can be checked before it has a public name:
 
-To go live, add a `routes` line to `sites/cabinetos/wrangler.jsonc`. A route tells Cloudflare which
-hostname the Worker answers on. The line is already there, in a comment:
+1. Deploy with no `routes` line in `sites/<label>/wrangler.jsonc`. The page then answers only at
+   `https://luminart-<label>.muzexp.workers.dev`, and that copy tells search engines to stay away.
+   Do not run `npm run verify` yet, and do not deploy the main site while its new card links to the
+   hostname: the name does not exist, and DNS (the system that turns a hostname into an address)
+   would remember "no such name" for up to 30 minutes.
+2. When the page is approved, add the route, which tells Cloudflare which hostname the Worker
+   answers on: `"routes": [{ "pattern": "<label>.luminart.app", "custom_domain": true }]`.
+   Then `npm run deploy:<label>`, then `npm run deploy` for the main site, then `npm run verify`.
 
-```jsonc
-"routes": [{ "pattern": "cabinetos.luminart.app", "custom_domain": true }]
+Screenshots come from a clean machine (window only, dark theme, about 1920x1020, no personal
+folder or drive names) and stay in `../_io/<label>-screenshots/`, outside the repo. Then:
+
+```bash
+python scripts/prep-shots.py cabinetos ../_io/cabinetos-screenshots 01-dual-pane.png
 ```
 
-After adding the line, run `npm run deploy:cabinetos` and then `npm run verify`. Two warnings:
-
-- Do not run `npm run verify` before go-live. The name does not exist yet. DNS (the system that
-  turns a hostname into an address) would remember "no such name" for up to 30 minutes.
-- The main page already has a CabinetOS card that links to the new hostname. Deploy the main site
-  (`npm run deploy` or `npm run deploy:all`) only after the route is added. Before that, the card
-  leads nowhere.
-
-The screenshot arrives later. Put the file in `public/images/`, then replace the striped placeholder
-in `public/index.html` with the `<img>` line from the comment above it. The card on the main page
-has its own `screenshot` field in `src/products.json` (see "Add a product").
+writes the web copies into `public/images/` (the hero 1600 wide, the others 1200, named after the
+source files without their number prefix), `og.jpg` for link previews, and the 560x350 card image
+into `src/static/images/`. It needs Pillow (`python -m pip install pillow`). The `<img>` lines in
+`public/index.html` and the card's `screenshot` field in `src/products.json` point at those files.
 
 For another product page, copy `sites/cabinetos/` to `sites/<label>/` and change the Worker name and
 the hostnames inside the files. Add `dev:<label>` and `deploy:<label>` scripts to `package.json`, and

@@ -4,7 +4,6 @@
   "compatibility_date": "2026-09-01",
   "workers_dev": true,
   "preview_urls": true,
-  "assets": { "directory": "./public", "not_found_handling": "404-page" }
-  // Go-live step (done later, on purpose not yet active): add
-  // "routes": [{ "pattern": "cabinetos.luminart.app", "custom_domain": true }]
+  "assets": { "directory": "./public", "not_found_handling": "404-page" },
+  "routes": [{ "pattern": "cabinetos.luminart.app", "custom_domain": true }]
 }

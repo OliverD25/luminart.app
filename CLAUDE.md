@@ -20,7 +20,8 @@ Colors, type, spacing and breakpoints there are final; product data is not.
   `luminart-<label>`.
 - `scripts/verify.mjs` — live checks after a deploy (`npm run verify`).
 - `sites/<label>/` — one static product page each (own Worker `luminart-<label>`, no build
-  step). `cabinetos` is not live yet: README, "Product pages".
+  step). `cabinetos` is live. How to add one, and the two-step go-live: README,
+  "Product pages". Screenshots are prepared with `scripts/prep-shots.py`.
 
 ## Rules
 
