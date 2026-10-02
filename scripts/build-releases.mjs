@@ -116,7 +116,49 @@ function checkMedia(body, bodyStart, releaseDir, file) {
 
 const slugify = (text) => text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'section';
 
-function renderBody(markdown) {
+// Reads the pixel size from the file header, so the <img> can reserve its space before it loads.
+function imageSize(path) {
+  const bytes = readFileSync(path);
+  const fail = (why) => { throw new Error(`${path}: cannot read the image size (${why})`); };
+  switch (extensionOf(path)) {
+    case '.png':
+      if (bytes.length < 24 || bytes.toString('latin1', 1, 4) !== 'PNG' || bytes.toString('latin1', 12, 16) !== 'IHDR') fail('no PNG IHDR header');
+      return { width: bytes.readUInt32BE(16), height: bytes.readUInt32BE(20) };
+    case '.gif':
+      if (bytes.length < 10 || !bytes.toString('latin1', 0, 3).startsWith('GIF')) fail('no GIF header');
+      return { width: bytes.readUInt16LE(6), height: bytes.readUInt16LE(8) };
+    case '.webp': {
+      if (bytes.length < 30 || bytes.toString('latin1', 0, 4) !== 'RIFF' || bytes.toString('latin1', 8, 12) !== 'WEBP') fail('no RIFF/WEBP header');
+      const kind = bytes.toString('latin1', 12, 16);
+      if (kind === 'VP8 ') return { width: bytes.readUInt16LE(26) & 0x3fff, height: bytes.readUInt16LE(28) & 0x3fff };
+      if (kind === 'VP8L') {
+        const bits = bytes.readUInt32LE(21);
+        return { width: (bits & 0x3fff) + 1, height: ((bits >> 14) & 0x3fff) + 1 };
+      }
+      if (kind === 'VP8X') return { width: bytes.readUIntLE(24, 3) + 1, height: bytes.readUIntLE(27, 3) + 1 };
+      return fail(`unknown WebP chunk "${kind}"`);
+    }
+    case '.jpg': {
+      if (bytes[0] !== 0xff || bytes[1] !== 0xd8) fail('no JPEG start marker');
+      let at = 2;
+      while (at + 9 < bytes.length) {
+        if (bytes[at] !== 0xff) fail('broken JPEG marker');
+        const marker = bytes[at + 1];
+        if (marker === 0xff) { at++; continue; }
+        // SOF0 to SOF15 hold the size, except DHT (c4), JPG (c8) and DAC (cc).
+        if (marker >= 0xc0 && marker <= 0xcf && ![0xc4, 0xc8, 0xcc].includes(marker)) {
+          return { width: bytes.readUInt16BE(at + 7), height: bytes.readUInt16BE(at + 5) };
+        }
+        at += 2 + bytes.readUInt16BE(at + 2);
+      }
+      return fail('no SOF marker');
+    }
+    default:
+      return fail('unsupported type');
+  }
+}
+
+function renderBody(markdown, releaseDir) {
   const headings = [];
   const used = new Set();
   const uniqueId = (text) => {
@@ -146,7 +188,7 @@ function renderBody(markdown) {
         const src = escapeHtml(href);
         const element = videoTypes.includes(extensionOf(href))
           ? `<video src="${src}" autoplay loop muted playsinline aria-label="${caption}"></video>`
-          : `<img src="${src}" alt="${caption}" loading="lazy">`;
+          : (({ width, height }) => `<img src="${src}" alt="${caption}" width="${width}" height="${height}" loading="lazy">`)(imageSize(join(releaseDir, href)));
         return `<figure class="media"><div class="window">${element}</div><figcaption>${caption}</figcaption></figure>`;
       },
     },
@@ -163,7 +205,7 @@ function readRelease(version) {
   if (data.version !== version) throw new ReleaseError(file, 1, `front matter version "${data.version}" differs from the folder name "${version}"`);
   const mediaDir = join(dir, 'media');
   const media = checkMedia(body, bodyStart, dir, file);
-  const { html, headings } = renderBody(body.join('\n'));
+  const { html, headings } = renderBody(body.join('\n'), dir);
   const firstImage = media.find((item) => ogImageTypes.includes(extensionOf(item.src)));
   return {
     ...data,
