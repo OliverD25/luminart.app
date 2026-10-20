@@ -126,11 +126,12 @@ When the product gets a real site, deploy that site as a Worker with the same na
 ## Product pages
 
 A product can have a page of its own. It is a separate static site in `sites/<label>/`, with its own
-Worker named `luminart-<label>`. `sites/cabinetos/` is the first one. `sites/wincraft/` is the second:
-the same pattern without release notes or a gallery, with a striped placeholder where a screenshot
-will go (`npm run dev:wincraft` serves it at http://localhost:8789, `npm run deploy:wincraft`
-publishes it). Its route is already in `wrangler.jsonc`, so deploying it connects
-`wincraft.luminart.app` at once; follow the two steps below by deploying the page before the main site.
+Worker named `luminart-<label>`. `sites/cabinetos/` is the first one. `sites/wincraft/` is the second,
+live at https://wincraft.luminart.app since 2026-10-21: the same pattern with a gallery but without
+release notes (`npm run dev:wincraft` serves it at http://localhost:8789, `npm run deploy:wincraft`
+publishes it). Its download button points at `releases/latest/download/wincraft.exe`, so a new
+WinCraft release needs only the version line on the page changed. Its screenshots were taken from
+the running app; the originals are in `../_io/wincraft-screenshots/`.
 
 - `public/` holds plain files: HTML, `page.css`, icons, `404.html`, `robots.txt`, `sitemap.xml` and
   its own `_headers`. Cloudflare serves the folder as it is. The only generated part is

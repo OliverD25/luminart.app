@@ -20,7 +20,7 @@ Colors, type, spacing and breakpoints there are final; product data is not.
   `luminart-<label>`.
 - `scripts/verify.mjs` — live checks after a deploy (`npm run verify`).
 - `sites/<label>/` — one static product page each (own Worker `luminart-<label>`, no build
-  step). `cabinetos` is live. `wincraft` (port 8789, no release notes) is ready but not deployed. How to add one, and the two-step go-live: README,
+  step). `cabinetos` and `wincraft` (port 8789, no release notes) are live. How to add one, and the two-step go-live: README,
   "Product pages". Screenshots are prepared with `scripts/prep-shots.py`.
   CabinetOS release notes (`sites/cabinetos/releases/<version>/notes.md`) are built into
   `public/releases/` by `npm run build:releases`: README, "Release notes". Never edit that folder.
