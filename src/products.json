@@ -13,7 +13,7 @@
     "href": "https://wincraft.luminart.app",
     "description": "A small, modular tray utility for Windows 11 in the style of PowerToys. A command palette, screen dimmer, window layout keeper and more, as plugins in one Rust program of about 11 MB.",
     "cta": "Open WinCraft →",
-    "screenshot": null
+    "screenshot": { "type": "image", "src": "/images/wincraft.webp", "alt": "WinCraft settings: the five plugins" }
   },
   {
     "name": "Telemetrix",
