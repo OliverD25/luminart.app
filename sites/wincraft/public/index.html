@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WinCraft — A modular tray utility for Windows 11</title>
+<meta name="description" content="A small tray utility for Windows 11 in the style of PowerToys: a command palette, screen dimmer, window layout keeper and more, as plugins in one program. Written in Rust, MIT license.">
+<link rel="canonical" href="https://wincraft.luminart.app/">
+<meta name="theme-color" content="#0c0b10">
+<meta property="og:title" content="WinCraft — A modular tray utility for Windows 11">
+<meta property="og:description" content="A small tray utility for Windows 11 in the style of PowerToys: a command palette, screen dimmer, window layout keeper and more, as plugins in one program. Written in Rust, MIT license.">
+<meta property="og:url" content="https://wincraft.luminart.app/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Luminart">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="/icons/wincraft-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="/icons/wincraft-256.png">
+<script>
+  {
+    let saved = null;
+    try { saved = localStorage.getItem('luminart-theme'); } catch {}
+    if (saved === 'light' || (!saved && matchMedia('(prefers-color-scheme: light)').matches)) {
+      document.documentElement.dataset.theme = 'light';
+      document.querySelector('meta[name="theme-color"]').content = '#f6f5f8';
+    }
+  }
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&family=DM+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="/page.css">
+</head>
+<body>
+<div class="page">
+  <header class="bar">
+    <a class="logo" href="https://luminart.app/"><svg width="22" height="22" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#0c0b10"/><rect x="20" y="16" width="8" height="32" rx="2" fill="#e6e4ec"/><rect x="20" y="40" width="26" height="8" rx="2" fill="#e6e4ec"/><circle cx="43" cy="21" r="5" fill="#c9a6ff"/></svg>Luminart</a>
+    <button class="theme-toggle" type="button" aria-label="Toggle color theme">Dark</button>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="kicker">Luminart product</p>
+        <h1>WinCraft</h1>
+        <p class="subtitle">A modular tray utility for Windows 11</p>
+        <p class="lead">A small utility in the style of Microsoft PowerToys, written in Rust. One program owns the tray icon, the autostart entry, the global hotkeys, a command palette and a settings window. Every feature is a plugin, so you keep only what you use.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="https://github.com/OliverD25/wincraft/releases/latest/download/wincraft.exe">Download for Windows</a>
+          <a class="btn" href="https://github.com/OliverD25/wincraft" target="_blank" rel="noopener">Source on GitHub</a>
+        </div>
+        <p class="meta">Version 0.17.1 · Windows 11 · one file, about 11 MB · MIT license · <a href="https://github.com/OliverD25/wincraft/releases" target="_blank" rel="noopener">Release notes →</a></p>
+        <p class="note">Not code-signed yet, so Windows SmartScreen asks once before the first start. Run <code>wincraft.exe --install</code> once to keep it.</p>
+      </div>
+      <img class="app-icon" src="/icons/wincraft-256.png" alt="WinCraft icon" width="112" height="112">
+    </section>
+    <section class="shot">
+      <h2 class="visually-hidden">Screenshot</h2>
+      <div class="window">
+        <div class="placeholder">screenshot</div>
+      </div>
+    </section>
+    <section class="features">
+      <h2 class="label">What it does</h2>
+      <ul class="grid">
+        <li class="card">
+          <h3>Command palette</h3>
+          <p>Press Win+Alt+P for a search box on the monitor under the pointer. It finds WinCraft commands, apps, open windows, files and folders on every disk (through Everything), bookmarks, sums and web searches.</p>
+        </li>
+        <li class="card">
+          <h3>ScreenDimmer</h3>
+          <p>Cover a monitor with a click-through black overlay, or turn it off over DDC/CI so Windows does not move your windows. Win+Alt+F1, F2 and F3.</p>
+        </li>
+        <li class="card">
+          <h3>LayoutKeeper</h3>
+          <p>Remembers the virtual desktop, monitor and taskbar order of each window, and puts them back after a reboot.</p>
+        </li>
+        <li class="card">
+          <h3>WindowNamer</h3>
+          <p>Give any window your own name, like "Mail" or "Research". The taskbar, Alt+Tab and the title bar show it, and it survives restarts.</p>
+        </li>
+        <li class="card">
+          <h3>LanguageIndicator</h3>
+          <p>Shows the input language you switched to in the middle of the screen, like macOS (UK → EN). Then it fades.</p>
+        </li>
+        <li class="card">
+          <h3>ShortcutDetector</h3>
+          <p>Shows which global key combinations are already taken, and warns you before you assign one that is. Win+Alt+Q.</p>
+        </li>
+        <li class="card">
+          <h3>Settings and plugin store</h3>
+          <p>A settings window with a page per plugin: options, hotkeys, config file and README. A store shows which plugins exist.</p>
+        </li>
+        <li class="card">
+          <h3>Safe updates</h3>
+          <p>It checks GitHub once a day and updates only when you click "Update now". The checksum is verified. A new version that crashes within 30 seconds is rolled back.</p>
+        </li>
+      </ul>
+    </section>
+    <section class="install">
+      <h2 class="label">How to install</h2>
+      <ol>
+        <li>Download <code>wincraft.exe</code>. There is no installer, just this one file.</li>
+        <li>Run <code>wincraft.exe --install</code> once from a normal terminal. It copies the file to <code>%LOCALAPPDATA%\Programs\WinCraft</code> and adds a Start menu entry.</li>
+        <li>WinCraft starts with Windows from then on, and updates itself when you click "Update now".</li>
+      </ol>
+    </section>
+  </main>
+  <footer>
+    <span class="copyright">© 2026 Luminart</span>
+    <div class="links">
+      <a href="mailto:redrickcarter39@gmail.com">redrickcarter39@gmail.com</a>
+      <a href="https://luminart.app/">luminart.app</a>
+      <a href="https://github.com/OliverD25" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </footer>
+</div>
+<script>
+  {
+    const root = document.documentElement;
+    const toggle = document.querySelector('.theme-toggle');
+    const showLabel = () => {
+      toggle.textContent = root.dataset.theme === 'light' ? 'Light' : 'Dark';
+    };
+    toggle.addEventListener('click', () => {
+      const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+      if (next === 'light') root.dataset.theme = 'light';
+      else delete root.dataset.theme;
+      document.querySelector('meta[name="theme-color"]').content = next === 'light' ? '#f6f5f8' : '#0c0b10';
+      try { localStorage.setItem('luminart-theme', next); } catch {}
+      showLabel();
+    });
+    showLabel();
+  }
+</script>
+</body>
+</html>
