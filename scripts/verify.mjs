@@ -1,7 +1,7 @@
 // Post-deploy checks. With a base URL argument (for example a preview URL), only two checks run
 // against that base: the home page and a missing page. The cabinetos site passes the same two
-// checks, so `node scripts/verify.mjs <url>` also works for a preview of it. That is why the home
-// page may then carry either title.
+// checks, and so does the wincraft site, so `node scripts/verify.mjs <url>` also works for a preview
+// of either. That is why the home page may then carry any of the three titles.
 const base = process.argv[2]?.replace(/\/+$/, '');
 const site = base ?? 'https://luminart.app';
 
@@ -9,7 +9,7 @@ const checks = [
   {
     url: `${site}/`,
     status: 200,
-    body: base ? ['<title>Luminart</title>', '<title>CabinetOS'] : '<title>Luminart</title>',
+    body: base ? ['<title>Luminart</title>', '<title>CabinetOS', '<title>WinCraft'] : '<title>Luminart</title>',
     headers: { 'x-content-type-options': 'nosniff' },
   },
   { url: `${site}/this-page-does-not-exist`, status: 404 },
@@ -23,6 +23,8 @@ if (!base) {
     { url: 'https://cabinetos.luminart.app/releases/', status: 200, body: '<title>Releases' },
     { url: 'https://cabinetos.luminart.app/releases/0.1.0/', status: 200, body: "What's new in 0.1.0" },
     { url: 'https://cabinetos.luminart.app/releases/0.1.1/', status: 200, body: "What's new in 0.1.1" },
+    { url: 'https://wincraft.luminart.app/', status: 200, body: '<title>WinCraft', headers: { 'x-content-type-options': 'nosniff' } },
+    { url: 'https://wincraft.luminart.app/this-page-does-not-exist', status: 404 },
   );
 }
 

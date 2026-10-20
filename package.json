@@ -7,11 +7,13 @@
     "dev": "wrangler dev --port 8787",
     "build:releases": "node scripts/build-releases.mjs",
     "dev:cabinetos": "npm run build:releases && wrangler dev -c sites/cabinetos/wrangler.jsonc --port 8788",
+    "dev:wincraft": "wrangler dev -c sites/wincraft/wrangler.jsonc --port 8789",
     "deploy": "wrangler deploy",
     "deploy:www": "wrangler deploy -c redirects/wrangler.jsonc -e www",
     "deploy:telemetrix": "wrangler deploy -c redirects/wrangler.jsonc -e telemetrix",
     "deploy:cabinetos": "npm run build:releases && wrangler deploy -c sites/cabinetos/wrangler.jsonc",
-    "deploy:all": "npm run deploy && npm run deploy:www && npm run deploy:telemetrix && npm run deploy:cabinetos",
+    "deploy:wincraft": "wrangler deploy -c sites/wincraft/wrangler.jsonc",
+    "deploy:all": "npm run deploy && npm run deploy:www && npm run deploy:telemetrix && npm run deploy:cabinetos && npm run deploy:wincraft",
     "verify": "node scripts/verify.mjs"
   },
   "devDependencies": {

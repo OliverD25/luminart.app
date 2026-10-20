@@ -8,6 +8,14 @@
     "screenshot": { "type": "image", "src": "/images/cabinetos.webp", "alt": "CabinetOS: the sidebar and the first of two file panes" }
   },
   {
+    "name": "WinCraft",
+    "subdomain": "wincraft.luminart.app",
+    "href": "https://wincraft.luminart.app",
+    "description": "A small, modular tray utility for Windows 11 in the style of PowerToys. A command palette, screen dimmer, window layout keeper and more, as plugins in one Rust program of about 11 MB.",
+    "cta": "Open WinCraft →",
+    "screenshot": null
+  },
+  {
     "name": "Telemetrix",
     "subdomain": "telemetrix.luminart.app",
     "href": "https://telemetrix.luminart.app",

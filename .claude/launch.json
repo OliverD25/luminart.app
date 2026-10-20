@@ -24,6 +24,19 @@
         "8788"
       ],
       "port": 8788
+    },
+    {
+      "name": "wincraft",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "wrangler",
+        "dev",
+        "-c",
+        "sites/wincraft/wrangler.jsonc",
+        "--port",
+        "8789"
+      ],
+      "port": 8789
     }
   ]
 }
