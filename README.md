@@ -45,7 +45,8 @@ npm run deploy             # main site: luminart.app
 npm run deploy:www         # www.luminart.app sends visitors to luminart.app (301)
 npm run deploy:telemetrix  # telemetrix.luminart.app sends visitors to the GitHub repo (302)
 npm run deploy:cabinetos   # the CabinetOS page (see "Product pages")
-npm run deploy:all         # all four, one after another
+npm run deploy:wincraft    # the WinCraft page (see "Product pages")
+npm run deploy:all         # all five, one after another
 npm run verify             # checks the live domains and prints PASS or FAIL per check
 ```
 
@@ -125,7 +126,11 @@ When the product gets a real site, deploy that site as a Worker with the same na
 ## Product pages
 
 A product can have a page of its own. It is a separate static site in `sites/<label>/`, with its own
-Worker named `luminart-<label>`. `sites/cabinetos/` is the first one.
+Worker named `luminart-<label>`. `sites/cabinetos/` is the first one. `sites/wincraft/` is the second:
+the same pattern without release notes or a gallery, with a striped placeholder where a screenshot
+will go (`npm run dev:wincraft` serves it at http://localhost:8789, `npm run deploy:wincraft`
+publishes it). Its route is already in `wrangler.jsonc`, so deploying it connects
+`wincraft.luminart.app` at once; follow the two steps below by deploying the page before the main site.
 
 - `public/` holds plain files: HTML, `page.css`, icons, `404.html`, `robots.txt`, `sitemap.xml` and
   its own `_headers`. Cloudflare serves the folder as it is. The only generated part is
