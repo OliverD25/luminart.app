@@ -3,12 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>WinCraft — A modular tray utility for Windows 11</title>
-<meta name="description" content="A small tray utility for Windows 11 in the style of PowerToys: a command palette, screen dimmer, window layout keeper and more, as plugins in one program. Written in Rust, MIT license.">
+<title>WinCraft — Windows 11, crafted for power users</title>
+<meta name="description" content="The single-executable Windows 11 power suite—bringing an instant command palette, multi-monitor layout recovery, and hardware display control into one tiny Rust binary.">
 <link rel="canonical" href="https://wincraft.luminart.app/">
 <meta name="theme-color" content="#0c0b10">
-<meta property="og:title" content="WinCraft — A modular tray utility for Windows 11">
-<meta property="og:description" content="A small tray utility for Windows 11 in the style of PowerToys: a command palette, screen dimmer, window layout keeper and more, as plugins in one program. Written in Rust, MIT license.">
+<meta property="og:title" content="WinCraft — Windows 11, crafted for power users">
+<meta property="og:description" content="The single-executable Windows 11 power suite—bringing an instant command palette, multi-monitor layout recovery, and hardware display control into one tiny Rust binary.">
 <meta property="og:url" content="https://wincraft.luminart.app/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Luminart">
@@ -42,16 +42,16 @@
   <main>
     <section class="hero">
       <div class="hero-text">
-        <p class="kicker">Luminart product</p>
-        <h1>WinCraft</h1>
-        <p class="subtitle">A modular tray utility for Windows 11</p>
-        <p class="lead">A small utility in the style of Microsoft PowerToys, written in Rust. One program owns the tray icon, the autostart entry, the global hotkeys, a command palette and a settings window. Every feature is a plugin, so you keep only what you use.</p>
+        <p class="product">WinCraft</p>
+        <p class="kicker">Open Source (MIT) · Built in Rust · Windows 11 (24H2 Ready)</p>
+        <h1>Windows 11, Crafted for Power Users.</h1>
+        <p class="lead">One tiny executable. Zero background bloat. WinCraft combines a lightning-fast command palette, virtual desktop layout memory, and hardware monitor controls into a single, rock-solid system tray app.</p>
         <div class="actions">
-          <a class="btn btn-primary" href="https://github.com/OliverD25/wincraft/releases/latest/download/wincraft.exe">Download for Windows</a>
-          <a class="btn" href="https://github.com/OliverD25/wincraft" target="_blank" rel="noopener">Source on GitHub</a>
+          <a class="btn btn-primary" href="https://github.com/OliverD25/wincraft/releases/latest/download/wincraft.exe">Download wincraft.exe</a>
+          <a class="btn" href="https://github.com/OliverD25/wincraft" target="_blank" rel="noopener">View on GitHub →</a>
         </div>
-        <p class="meta">Version 0.17.1 · Windows 11 · one file, about 11 MB · MIT license · <a href="https://github.com/OliverD25/wincraft/releases" target="_blank" rel="noopener">Release notes →</a></p>
-        <p class="note">Not code-signed yet, so Windows SmartScreen asks once before the first start. Run <code>wincraft.exe --install</code> once to keep it.</p>
+        <p class="note">No installer required. Portable out of the box, or install in one command: <code>wincraft.exe --install</code></p>
+        <p class="meta">Version 0.17.1 · about 11 MB · Not code-signed yet, so SmartScreen asks once · <a href="https://github.com/OliverD25/wincraft/releases" target="_blank" rel="noopener">Release notes →</a></p>
       </div>
       <img class="app-icon" src="/icons/wincraft-256.png" alt="WinCraft icon" width="112" height="112">
     </section>
@@ -60,6 +60,53 @@
       <div class="window">
         <img src="/images/hero.webp" alt="The WinCraft command palette: a search box over a list of WinCraft commands such as Open settings, Plugin store and Saved window layout" width="1011" height="621" loading="eager">
       </div>
+    </section>
+    <section class="section palette">
+      <p class="label">The Command Palette (<code>Win+Alt+P</code>)</p>
+      <h2>One Search Box for Everything on Your PC</h2>
+      <p class="body">Summon the palette right on the monitor where your cursor lives. Type a few letters to launch apps, jump to open windows across any virtual desktop, search every disk in milliseconds via Everything, or use quick symbol prefixes to take instant action:</p>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th scope="col">Prefix</th><th scope="col">Action</th><th scope="col">What It Does</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>(none)</code></td><td>Blended Search</td><td>Searches WinCraft commands, installed &amp; Store apps, open windows, bookmarks, and files at once—ranked automatically by what you use most.</td></tr>
+            <tr><td><code>&lt;</code></td><td>Window Switcher</td><td>Filter open windows across all virtual desktops by app title or custom WindowNamer label.</td></tr>
+            <tr><td><code>.</code> / <code>/</code></td><td>Instant File &amp; Path Search</td><td>Query every drive in milliseconds via voidtools' Everything (with automatic fallback to Windows Search) or browse directories folder-by-folder.</td></tr>
+            <tr><td><code>&gt;</code></td><td>Headless Terminal</td><td>Run WSL bash, PowerShell 7, or CMD commands straight inside the palette with live streaming output and built-in safety guards for destructive commands.</td></tr>
+            <tr><td><code>=</code></td><td>Quick Calculator</td><td>Evaluate math expressions, percentages (<code>200 * 15%</code>), and modulo operations on the fly.</td></tr>
+            <tr><td><code>'</code> / <code>?</code></td><td>Bookmarks &amp; Web</td><td>Jump to custom keyword bookmarks (<code>Ctrl+B</code> on any file/folder) or fire off a web search.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <section class="section plugins">
+      <p class="label">Built-In Power Plugins</p>
+      <h2>Five Essential Tools. Zero Extra Processes.</h2>
+      <p class="body">Instead of running five separate background utilities fighting over keyboard hooks and tray icons, WinCraft runs everything inside a unified host.</p>
+      <ul class="grid">
+        <li class="card">
+          <h3>LayoutKeeper <span>— Never Lose Your Window Setup Again</span></h3>
+          <p>Remembers which monitor and virtual desktop every window lives on—plus the exact order of thumbnails in your taskbar group. Reboot or unplug a display and restore your entire workspace with <code>Win+Alt+L</code>, or visually drag and reorder windows across desktops using the live Arrange Strip (<code>Win+Alt+A</code>).</p>
+        </li>
+        <li class="card">
+          <h3>ScreenDimmer <span>— Hardware &amp; Overlay Monitor Control</span></h3>
+          <p>Black out idle monitors with a click-through overlay (<code>Win+Alt+F1/F2/F3</code>) that turns translucent under your cursor, or power displays down directly over DDC/CI (<code>Win+Alt+Shift+F1/F2/F3</code>) without Windows scrambling your open windows onto your main screen.</p>
+        </li>
+        <li class="card">
+          <h3>WindowNamer <span>— Persistent Custom Window Titles</span></h3>
+          <p>Turn three identical browser windows into "Mail", "Research", and "Bank" (<code>Win+Alt+E</code>). Custom names show up in the title bar, Alt+Tab, and taskbar thumbnails—and persist even when the app changes its page title or restarts.</p>
+        </li>
+        <li class="card">
+          <h3>LanguageIndicator <span>— Clean On-Screen Input HUD</span></h3>
+          <p>Switch from Ukrainian to English and get a sleek, click-through translucent HUD right in the center of your screen (UK → EN) that fades out smoothly without ever stealing window focus.</p>
+        </li>
+        <li class="card">
+          <h3>ShortcutDetector <span>— End Global Hotkey Conflicts</span></h3>
+          <p>Press <code>Win+Alt+Q</code> to see every global shortcut already registered on your PC and test key combinations before you assign them.</p>
+        </li>
+      </ul>
     </section>
     <section class="gallery">
       <h2 class="label">More views</h2>
@@ -90,50 +137,35 @@
         </li>
       </ul>
     </section>
-    <section class="features">
-      <h2 class="label">What it does</h2>
-      <ul class="grid">
+    <section class="section why">
+      <p class="label">Why Power Users &amp; Developers Love WinCraft</p>
+      <h2>Engineered to Respect Your Machine</h2>
+      <ul class="grid why-grid">
         <li class="card">
-          <h3>Command palette</h3>
-          <p>Press Win+Alt+P for a search box on the monitor under the pointer. It finds WinCraft commands, apps, open windows, files and folders on every disk (through Everything), bookmarks, sums and web searches.</p>
+          <p><strong>Single Portable Binary:</strong> Compiles down to one standalone <code>wincraft.exe</code>. No runtime installers, no webview overhead, no administrator privileges required.</p>
         </li>
         <li class="card">
-          <h3>ScreenDimmer</h3>
-          <p>Cover a monitor with a click-through black overlay, or turn it off over DDC/CI so Windows does not move your windows. Win+Alt+F1, F2 and F3.</p>
+          <p><strong>Crash-Proof Configs:</strong> All settings live in clean, human-readable JSON files under <code>%LOCALAPPDATA%\WinCraft</code>. Every plugin gets its own file—if you make a syntax error editing one, WinCraft safely falls back to defaults without wiping your configuration.</p>
         </li>
         <li class="card">
-          <h3>LayoutKeeper</h3>
-          <p>Remembers the virtual desktop, monitor and taskbar order of each window, and puts them back after a reboot.</p>
+          <p><strong>Self-Healing Updates:</strong> Optional daily update checks verify SHA256 checksums and automatically roll back to your previous binary if a new version fails to run cleanly for 30 seconds.</p>
         </li>
         <li class="card">
-          <h3>WindowNamer</h3>
-          <p>Give any window your own name, like "Mail" or "Research". The taskbar, Alt+Tab and the title bar show it, and it survives restarts.</p>
-        </li>
-        <li class="card">
-          <h3>LanguageIndicator</h3>
-          <p>Shows the input language you switched to in the middle of the screen, like macOS (UK → EN). Then it fades.</p>
-        </li>
-        <li class="card">
-          <h3>ShortcutDetector</h3>
-          <p>Shows which global key combinations are already taken, and warns you before you assign one that is. Win+Alt+Q.</p>
-        </li>
-        <li class="card">
-          <h3>Settings and plugin store</h3>
-          <p>A settings window with a page per plugin: options, hotkeys, config file and README. A store shows which plugins exist.</p>
-        </li>
-        <li class="card">
-          <h3>Safe updates</h3>
-          <p>It checks GitHub once a day and updates only when you click "Update now". The checksum is verified. A new version that crashes within 30 seconds is rolled back.</p>
+          <p><strong>1-Trait Plugin Architecture:</strong> Want to build your own tool? Implement a single Rust trait and describe your settings. WinCraft handles all the Win32 plumbing, global hotkeys, config persistence, and UI rendering automatically.</p>
         </li>
       </ul>
     </section>
-    <section class="install">
-      <h2 class="label">How to install</h2>
-      <ol>
-        <li>Download <code>wincraft.exe</code>. There is no installer, just this one file.</li>
-        <li>Run <code>wincraft.exe --install</code> once from a normal terminal. It copies the file to <code>%LOCALAPPDATA%\Programs\WinCraft</code> and adds a Start menu entry.</li>
-        <li>WinCraft starts with Windows from then on, and updates itself when you click "Update now".</li>
-      </ol>
+    <section class="section cta">
+      <h2>Ready to Upgrade Your Windows 11 Workflow?</h2>
+      <p class="body">Build from source in seconds with Cargo or grab the latest release on GitHub.</p>
+      <pre><code>git clone https://github.com/OliverD25/wincraft
+cd wincraft
+cargo build --release</code></pre>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://github.com/OliverD25/wincraft/releases/latest/download/wincraft.exe">Download wincraft.exe</a>
+        <a class="btn" href="https://github.com/OliverD25/wincraft" target="_blank" rel="noopener">★ Star OliverD25/wincraft on GitHub</a>
+      </div>
+      <p class="meta">MIT Licensed</p>
     </section>
   </main>
   <footer>

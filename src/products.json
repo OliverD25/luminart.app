@@ -11,7 +11,7 @@
     "name": "WinCraft",
     "subdomain": "wincraft.luminart.app",
     "href": "https://wincraft.luminart.app",
-    "description": "A small, modular tray utility for Windows 11 in the style of PowerToys. A command palette, screen dimmer, window layout keeper and more, as plugins in one Rust program of about 11 MB.",
+    "description": "The single-executable Windows 11 power suite: an instant command palette, multi-monitor layout recovery and hardware display control in one tiny Rust binary.",
     "cta": "Open WinCraft →",
     "screenshot": { "type": "image", "src": "/images/wincraft.webp", "alt": "The WinCraft command palette listing its commands" }
   },
