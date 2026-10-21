@@ -6,3 +6,4 @@ dist/
 *.log
 sites/cabinetos/public/releases/
 sites/wincraft/public/releases/
+sites/telemetrix/public/releases/

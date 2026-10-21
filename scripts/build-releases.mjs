@@ -22,6 +22,13 @@ const sites = {
     icons: `<link rel="icon" href="/icons/wincraft-32.png" sizes="32x32">
 <link rel="apple-touch-icon" href="/icons/wincraft-256.png">`,
   },
+  telemetrix: {
+    name: 'Telemetrix',
+    origin: 'https://telemetrix.luminart.app',
+    repoDownloads: 'https://github.com/OliverD25/telemetrix/releases/download',
+    icons: `<link rel="icon" href="/icons/favicon-32.png" sizes="32x32">
+<link rel="icon" href="/icons/luminart-icon.svg" type="image/svg+xml">`,
+  },
 };
 
 // The site being built; set by buildSite() before anything below runs.
