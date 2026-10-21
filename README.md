@@ -129,10 +129,10 @@ When the product gets a real site, deploy that site as a Worker with the same na
 
 A product can have a page of its own. It is a separate static site in `sites/<label>/`, with its own
 Worker named `luminart-<label>`. `sites/cabinetos/` is the first one. `sites/wincraft/` is the second,
-live at https://wincraft.luminart.app since 2026-10-21: the same pattern with a gallery but without
+live at https://wincraft.luminart.app since 2026-10-21: the same pattern with a gallery and
 release notes (`npm run dev:wincraft` serves it at http://localhost:8789, `npm run deploy:wincraft`
 publishes it). Its download button points at `releases/latest/download/wincraft.exe`, so a new
-WinCraft release needs only the version line on the page changed. Its screenshots were taken from
+WinCraft release needs its notes (see "Release notes") and the version line on the page changed. Its screenshots were taken from
 the running app; the originals are in `../_io/wincraft-screenshots/`.
 `sites/telemetrix/` is the third: the same pattern with one screenshot (`npm run dev:telemetrix` serves
 it at http://localhost:8790, `npm run deploy:telemetrix` publishes it). It keeps the Worker name
@@ -183,8 +183,9 @@ never use 8080).
 
 ### Release notes
 
-The CabinetOS site has a "What's new in <version>" page for every release, in the style of VS Code's
-release notes. Each release is written as files in `sites/cabinetos/releases/<version>/`:
+The CabinetOS and WinCraft sites have a "What's new in <version>" page for every release, in the style
+of VS Code's release notes. Each release is written as files in `sites/<label>/releases/<version>/`
+(`<label>` is `cabinetos` or `wincraft`):
 
 - `notes.md`: front matter, then the notes in markdown.
 - `media/`: the images and short videos that `notes.md` shows.
@@ -198,7 +199,7 @@ date: 2026-09-30
 summary: One sentence for the list and the link preview.
 download: CabinetOS-0.1.0-win-x64-setup.exe
 highlights:
-  - Three to six short lines
+  - One to six short lines
   - that open the page
   - in a Highlights card
 ---
@@ -206,7 +207,8 @@ highlights:
 
 - `version` is `MAJOR.MINOR.PATCH` and must match the folder name. `date` is `YYYY-MM-DD`.
 - `download` is the file name of the release asset. The page links to
-  `https://github.com/OliverD25/cabinetos/releases/download/v<version>/<download>`.
+  `https://github.com/OliverD25/<label>/releases/download/v<version>/<download>`. WinCraft's asset
+  is always `wincraft.exe`.
 - `title` is optional. The default is `What's new in <version>`.
 
 The body uses `##` for sections, `###` for features, and normal markdown: paragraphs, bullet lists,
@@ -221,10 +223,18 @@ type is an error. The first `.png`, `.webp` or `.jpg` of the notes is also the l
 of the page.
 
 ```bash
-npm run build:releases     # writes public/releases/ and rewrites public/sitemap.xml
-npm run dev:cabinetos      # builds the releases, then serves http://localhost:8788
-npm run deploy:cabinetos   # builds the releases, then publishes
+npm run build:releases                      # builds every site in the table, rewrites each public/sitemap.xml
+node scripts/build-releases.mjs wincraft    # builds one site, named by its label
+npm run dev:cabinetos      # builds its releases, then serves http://localhost:8788
+npm run deploy:cabinetos   # builds its releases, then publishes
+npm run dev:wincraft       # the same for WinCraft, on http://localhost:8789
+npm run deploy:wincraft
 ```
+
+The per-site facts (display name, origin, GitHub downloads address, icon links) are a table at the top
+of `scripts/build-releases.mjs`, keyed by label. A new site with release notes adds a row there, copies
+the `/* Release notes */ ` block at the end of `sites/cabinetos/public/page.css` into its own
+`page.css`, and gets the `node scripts/build-releases.mjs <label>` call in its dev and deploy scripts.
 
 `scripts/build-releases.mjs` uses the `marked` package and Node's own modules. It lists the releases
 newest first (compared as numbers, so 0.10.0 is newer than 0.9.0). It empties and fills only

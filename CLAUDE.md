@@ -20,11 +20,12 @@ Colors, type, spacing and breakpoints there are final; product data is not.
   `luminart-<label>`.
 - `scripts/verify.mjs` — live checks after a deploy (`npm run verify`).
 - `sites/<label>/` — one static product page each (own Worker `luminart-<label>`, no build
-  step). `cabinetos` and `wincraft` (port 8789, no release notes) are live. `telemetrix` (port 8790) is built
+  step). `cabinetos` and `wincraft` (port 8789) are live. `telemetrix` (port 8790) is built
   but not yet deployed: deploying it replaces the old redirect; its download links name v0.4.0. How to add one, and the two-step go-live: README,
   "Product pages". Screenshots are prepared with `scripts/prep-shots.py`.
-  CabinetOS release notes (`sites/cabinetos/releases/<version>/notes.md`) are built into
-  `public/releases/` by `npm run build:releases`: README, "Release notes". Never edit that folder.
+  CabinetOS and WinCraft release notes (`sites/<label>/releases/<version>/notes.md`) are built into
+  `public/releases/` by `node scripts/build-releases.mjs <label>` (`npm run build:releases` builds
+  both): README, "Release notes". Never edit that folder.
 
 ## Rules
 
