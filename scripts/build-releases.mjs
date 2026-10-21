@@ -3,12 +3,29 @@ import { join } from 'node:path';
 import { Marked } from 'marked';
 
 const root = join(import.meta.dirname, '..');
-const site = join(root, 'sites', 'cabinetos');
-const sourceDir = join(site, 'releases');
-const publicDir = join(site, 'public');
-const outDir = join(publicDir, 'releases');
-const origin = 'https://cabinetos.luminart.app';
-const repoDownloads = 'https://github.com/OliverD25/cabinetos/releases/download';
+
+// One row per site with release notes. A new site adds a row here and a build:releases call to its scripts.
+// `icons` are the <link> lines of the page head; the CabinetOS page has an SVG icon, the WinCraft page has none.
+const sites = {
+  cabinetos: {
+    name: 'CabinetOS',
+    origin: 'https://cabinetos.luminart.app',
+    repoDownloads: 'https://github.com/OliverD25/cabinetos/releases/download',
+    icons: `<link rel="icon" href="/icons/cabinetos.svg" type="image/svg+xml">
+<link rel="icon" href="/icons/cabinetos-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="/icons/cabinetos-256.png">`,
+  },
+  wincraft: {
+    name: 'WinCraft',
+    origin: 'https://wincraft.luminart.app',
+    repoDownloads: 'https://github.com/OliverD25/wincraft/releases/download',
+    icons: `<link rel="icon" href="/icons/wincraft-32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="/icons/wincraft-256.png">`,
+  },
+};
+
+// The site being built; set by buildSite() before anything below runs.
+let label, siteName, sourceDir, publicDir, outDir, origin, repoDownloads, iconLinks;
 
 // Attributes are always double-quoted, so the apostrophe stays literal (the page title reads What's new).
 const entities = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' };
@@ -198,7 +215,7 @@ function renderBody(markdown, releaseDir) {
 
 function readRelease(version) {
   const dir = join(sourceDir, version);
-  const file = `sites/cabinetos/releases/${version}/notes.md`;
+  const file = `sites/${label}/releases/${version}/notes.md`;
   const notesPath = join(dir, 'notes.md');
   if (!existsSync(notesPath)) throw new ReleaseError(file, 0, 'notes.md does not exist');
   const { data, bodyStart, body } = parseFrontMatter(readFileSync(notesPath, 'utf8'), file);
@@ -268,9 +285,7 @@ function renderHead({ title, description, path, type, ogImage }) {
 <meta property="og:site_name" content="Luminart">
 <meta property="og:image" content="${escapeHtml(image)}">${size}
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/icons/cabinetos.svg" type="image/svg+xml">
-<link rel="icon" href="/icons/cabinetos-32.png" sizes="32x32">
-<link rel="apple-touch-icon" href="/icons/cabinetos-256.png">
+${iconLinks}
 ${themeScript}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -282,7 +297,7 @@ ${themeScript}
 const renderBar = (current) => `  <header class="bar">
     <div class="bar-start">
       <a class="logo" href="https://luminart.app/">${logo}Luminart</a>
-      <nav class="crumbs" aria-label="Breadcrumb">Luminart / <a href="/">CabinetOS</a> / <a href="/releases/"${current ? ' aria-current="page"' : ''}>Releases</a></nav>
+      <nav class="crumbs" aria-label="Breadcrumb">Luminart / <a href="/">${siteName}</a> / <a href="/releases/"${current ? ' aria-current="page"' : ''}>Releases</a></nav>
     </div>
     <button class="theme-toggle" type="button" aria-label="Toggle color theme">Dark</button>
   </header>`;
@@ -306,7 +321,7 @@ function renderReleasePage(release) {
 ${release.headings.map((h) => `            <li><a href="#${h.id}">${escapeHtml(h.text)}</a></li>`).join('\n')}
           </ol>
         </nav>`;
-  return `${renderHead({ title: `${release.title} · CabinetOS`, description: release.summary, path, type: 'article', ogImage: release.ogImage })}
+  return `${renderHead({ title: `${release.title} · ${siteName}`, description: release.summary, path, type: 'article', ogImage: release.ogImage })}
 <body>
 <div class="page">
 ${renderBar(false)}
@@ -340,13 +355,13 @@ ${toggleScript}
 }
 
 function renderIndexPage(releases) {
-  return `${renderHead({ title: 'Releases · CabinetOS', description: 'Release notes for every version of CabinetOS, newest first.', path: '/releases/', type: 'website', ogImage: null })}
+  return `${renderHead({ title: `Releases · ${siteName}`, description: `Release notes for every version of ${siteName}, newest first.`, path: '/releases/', type: 'website', ogImage: null })}
 <body>
 <div class="page">
 ${renderBar(true)}
   <main class="release">
     <header class="release-head">
-      <p class="kicker">CabinetOS</p>
+      <p class="kicker">${siteName}</p>
       <h1>Releases</h1>
       <p class="release-summary">What each version adds, newest first.</p>
     </header>
@@ -376,30 +391,47 @@ ${['/', '/releases/', ...releases.map((release) => `/releases/${release.version}
 </urlset>
 `;
 
-const versions = readdirSync(sourceDir, { withFileTypes: true })
-  .filter((entry) => entry.isDirectory() && existsSync(join(sourceDir, entry.name, 'notes.md')))
-  .map((entry) => entry.name);
-for (const version of versions) {
-  if (!/^\d+\.\d+\.\d+$/.test(version)) throw new Error(`sites/cabinetos/releases/${version}: the folder name must be MAJOR.MINOR.PATCH`);
+function buildSite(key) {
+  const config = sites[key];
+  if (!config) throw new Error(`unknown site "${key}" (known: ${Object.keys(sites).join(', ')})`);
+  label = key;
+  siteName = config.name;
+  origin = config.origin;
+  repoDownloads = config.repoDownloads;
+  iconLinks = config.icons;
+  const siteDir = join(root, 'sites', label);
+  sourceDir = join(siteDir, 'releases');
+  publicDir = join(siteDir, 'public');
+  outDir = join(publicDir, 'releases');
+
+  const versions = readdirSync(sourceDir, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory() && existsSync(join(sourceDir, entry.name, 'notes.md')))
+    .map((entry) => entry.name);
+  for (const version of versions) {
+    if (!/^\d+\.\d+\.\d+$/.test(version)) throw new Error(`sites/${label}/releases/${version}: the folder name must be MAJOR.MINOR.PATCH`);
+  }
+  if (versions.length === 0) throw new Error(`sites/${label}/releases/: no release folder with a notes.md was found`);
+  versions.sort(compareVersions);
+
+  // Read and check everything first, so a mistake in one notes.md leaves the old output untouched.
+  const releases = versions.map(readRelease);
+
+  // Empty releases/ rather than delete it: on Windows, `wrangler dev` holds watched folders open,
+  // so removing the folder itself fails with EPERM.
+  mkdirSync(outDir, { recursive: true });
+  for (const entry of readdirSync(outDir)) rmSync(join(outDir, entry), { recursive: true, force: true });
+
+  for (const release of releases) {
+    const releaseOut = join(outDir, release.version);
+    mkdirSync(releaseOut, { recursive: true });
+    writeFileSync(join(releaseOut, 'index.html'), renderReleasePage(release));
+    if (release.mediaDir && statSync(release.mediaDir).isDirectory()) cpSync(release.mediaDir, join(releaseOut, 'media'), { recursive: true });
+  }
+  writeFileSync(join(outDir, 'index.html'), renderIndexPage(releases));
+  writeFileSync(join(publicDir, 'sitemap.xml'), renderSitemap(releases));
+
+  console.log(`${siteName}: built ${releases.length} release page(s): ${versions.join(', ')}.`);
 }
-if (versions.length === 0) throw new Error('sites/cabinetos/releases/: no release folder with a notes.md was found');
-versions.sort(compareVersions);
 
-// Read and check everything first, so a mistake in one notes.md leaves the old output untouched.
-const releases = versions.map(readRelease);
-
-// Empty releases/ rather than delete it: on Windows, `wrangler dev` holds watched folders open,
-// so removing the folder itself fails with EPERM.
-mkdirSync(outDir, { recursive: true });
-for (const entry of readdirSync(outDir)) rmSync(join(outDir, entry), { recursive: true, force: true });
-
-for (const release of releases) {
-  const releaseOut = join(outDir, release.version);
-  mkdirSync(releaseOut, { recursive: true });
-  writeFileSync(join(releaseOut, 'index.html'), renderReleasePage(release));
-  if (release.mediaDir && statSync(release.mediaDir).isDirectory()) cpSync(release.mediaDir, join(releaseOut, 'media'), { recursive: true });
-}
-writeFileSync(join(outDir, 'index.html'), renderIndexPage(releases));
-writeFileSync(join(publicDir, 'sitemap.xml'), renderSitemap(releases));
-
-console.log(`Built ${releases.length} release page(s): ${versions.join(', ')}.`);
+const requested = process.argv[2];
+for (const key of requested ? [requested] : Object.keys(sites)) buildSite(key);
