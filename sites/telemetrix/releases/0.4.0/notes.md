@@ -20,7 +20,7 @@ Press `s` and you no longer get one long list of about 60 rows. Five categories 
 - **Appearance:** theme, fps, the current theme's options and cards, units, and the keys of one theme.
 - **Cards:** thresholds, disks and network drives, GPU, history length.
 - **Plugins:** every plugin file, with a switch for all plugins.
-- **Updates:** the version, the update check and the install.
+- **Updates:** the update settings.
 - **System:** screensaver mode, log, plugin folder, memory budgets, plugin limits, metrics intervals.
 
 Nothing is hidden. The technical settings just have their own page. The box always opens at Appearance.
