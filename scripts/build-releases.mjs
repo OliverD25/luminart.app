@@ -99,8 +99,8 @@ function parseFrontMatter(text, file) {
   const parsed = date && new Date(Date.UTC(+date[1], +date[2] - 1, +date[3]));
   if (!parsed || parsed.toISOString().slice(0, 10) !== data.date) throw new ReleaseError(file, 1, `date "${data.date}" is not a real YYYY-MM-DD date`);
   if (/[\\/]/.test(data.download)) throw new ReleaseError(file, 1, `download "${data.download}" must be a file name, not a path`);
-  if (data.highlights.length < 3 || data.highlights.length > 6) {
-    throw new ReleaseError(file, 1, `"highlights" needs 3 to 6 lines, found ${data.highlights.length}`);
+  if (data.highlights.length > 6) {
+    throw new ReleaseError(file, 1, `"highlights" needs 1 to 6 lines, found ${data.highlights.length}`);
   }
   return { data, bodyStart: end + 1, body: lines.slice(end + 1) };
 }
