@@ -3,4 +3,22 @@
   <url>
     <loc>https://telemetrix.luminart.app/</loc>
   </url>
+  <url>
+    <loc>https://telemetrix.luminart.app/releases/</loc>
+  </url>
+  <url>
+    <loc>https://telemetrix.luminart.app/releases/0.4.0/</loc>
+  </url>
+  <url>
+    <loc>https://telemetrix.luminart.app/releases/0.3.2/</loc>
+  </url>
+  <url>
+    <loc>https://telemetrix.luminart.app/releases/0.3.1/</loc>
+  </url>
+  <url>
+    <loc>https://telemetrix.luminart.app/releases/0.3.0/</loc>
+  </url>
+  <url>
+    <loc>https://telemetrix.luminart.app/releases/0.2.0/</loc>
+  </url>
 </urlset>
