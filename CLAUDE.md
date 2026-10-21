@@ -24,9 +24,9 @@ Colors, type, spacing and breakpoints there are final; product data is not.
   live since 2026-10-21 (it replaced the old redirect); its download links name v0.4.0, so each
   Telemetrix release needs them edited. How to add one, and the two-step go-live: README,
   "Product pages". Screenshots are prepared with `scripts/prep-shots.py`.
-  CabinetOS and WinCraft release notes (`sites/<label>/releases/<version>/notes.md`) are built into
+  CabinetOS, WinCraft and Telemetrix release notes (`sites/<label>/releases/<version>/notes.md`) are built into
   `public/releases/` by `node scripts/build-releases.mjs <label>` (`npm run build:releases` builds
-  both): README, "Release notes". Never edit that folder.
+  all three): README, "Release notes". Never edit that folder.
 
 ## Rules
 

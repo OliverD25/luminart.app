@@ -19,6 +19,8 @@ if (!base) {
     { url: 'https://www.luminart.app/a/b?c=1', status: 301, headers: { location: 'https://luminart.app/a/b?c=1' } },
     { url: 'https://telemetrix.luminart.app/', status: 200, body: '<title>Telemetrix', headers: { 'x-content-type-options': 'nosniff' } },
     { url: 'https://telemetrix.luminart.app/this-page-does-not-exist', status: 404 },
+    { url: 'https://telemetrix.luminart.app/releases/', status: 200, body: '<title>Releases' },
+    { url: 'https://telemetrix.luminart.app/releases/0.4.0/', status: 200, body: "What's new in 0.4.0" },
     { url: 'https://cabinetos.luminart.app/', status: 200, body: '<title>CabinetOS', headers: { 'x-content-type-options': 'nosniff' } },
     { url: 'https://cabinetos.luminart.app/this-page-does-not-exist', status: 404 },
     { url: 'https://cabinetos.luminart.app/releases/', status: 200, body: '<title>Releases' },

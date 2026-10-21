@@ -138,7 +138,7 @@ the running app; the originals are in `../_io/wincraft-screenshots/`.
 it at http://localhost:8790, `npm run deploy:telemetrix` publishes it). It keeps the Worker name
 `luminart-telemetrix` of the old redirect, so deploying it replaces the redirect and takes over
 `telemetrix.luminart.app`. Its download buttons name a version (`v0.4.0`) because the releases have no
-stable "latest" file name: on a new release, change both links and the version line on the page. It has
+stable "latest" file name: on a new release, change both links and the version line on the page, and add its notes (see "Release notes"). It has
 no app icon, so the hero shows a `>_` badge and the favicon is the Luminart mark.
 
 - `public/` holds plain files: HTML, `page.css`, icons, `404.html`, `robots.txt`, `sitemap.xml` and
@@ -183,9 +183,9 @@ never use 8080).
 
 ### Release notes
 
-The CabinetOS and WinCraft sites have a "What's new in <version>" page for every release, in the style
+The CabinetOS, WinCraft and Telemetrix sites have a "What's new in <version>" page for every release, in the style
 of VS Code's release notes. Each release is written as files in `sites/<label>/releases/<version>/`
-(`<label>` is `cabinetos` or `wincraft`):
+(`<label>` is `cabinetos`, `wincraft` or `telemetrix`):
 
 - `notes.md`: front matter, then the notes in markdown.
 - `media/`: the images and short videos that `notes.md` shows.
@@ -208,7 +208,7 @@ highlights:
 - `version` is `MAJOR.MINOR.PATCH` and must match the folder name. `date` is `YYYY-MM-DD`.
 - `download` is the file name of the release asset. The page links to
   `https://github.com/OliverD25/<label>/releases/download/v<version>/<download>`. WinCraft's asset
-  is always `wincraft.exe`.
+  is always `wincraft.exe`. Telemetrix's is `telemetrix-v<version>-windows-x86_64.zip`.
 - `title` is optional. The default is `What's new in <version>`.
 
 The body uses `##` for sections, `###` for features, and normal markdown: paragraphs, bullet lists,
@@ -229,6 +229,8 @@ npm run dev:cabinetos      # builds its releases, then serves http://localhost:8
 npm run deploy:cabinetos   # builds its releases, then publishes
 npm run dev:wincraft       # the same for WinCraft, on http://localhost:8789
 npm run deploy:wincraft
+npm run dev:telemetrix     # the same for Telemetrix, on http://localhost:8790
+npm run deploy:telemetrix
 ```
 
 The per-site facts (display name, origin, GitHub downloads address, icon links) are a table at the top
