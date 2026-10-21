@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Telemetrix — A tiny terminal dashboard and screensaver</title>
+<meta name="description" content="A very light terminal screensaver and live system dashboard for Windows 11 and Linux, written in Rust. It runs in about 8 MB of memory.">
+<link rel="canonical" href="https://telemetrix.luminart.app/">
+<meta name="theme-color" content="#0c0b10">
+<meta property="og:title" content="Telemetrix — A tiny terminal dashboard and screensaver">
+<meta property="og:description" content="A very light terminal screensaver and live system dashboard for Windows 11 and Linux, written in Rust. It runs in about 8 MB of memory.">
+<meta property="og:url" content="https://telemetrix.luminart.app/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Luminart">
+<meta property="og:image" content="https://telemetrix.luminart.app/images/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/icons/favicon-32.png" sizes="32x32">
+<link rel="icon" href="/icons/luminart-icon.svg" type="image/svg+xml">
+<script>
+  {
+    let saved = null;
+    try { saved = localStorage.getItem('luminart-theme'); } catch {}
+    if (saved === 'light' || (!saved && matchMedia('(prefers-color-scheme: light)').matches)) {
+      document.documentElement.dataset.theme = 'light';
+      document.querySelector('meta[name="theme-color"]').content = '#f6f5f8';
+    }
+  }
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500&family=DM+Mono:wght@400&display=swap">
+<link rel="stylesheet" href="/page.css">
+</head>
+<body>
+<div class="page">
+  <header class="bar">
+    <a class="logo" href="https://luminart.app/"><svg width="22" height="22" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="16" fill="#0c0b10"/><rect x="20" y="16" width="8" height="32" rx="2" fill="#e6e4ec"/><rect x="20" y="40" width="26" height="8" rx="2" fill="#e6e4ec"/><circle cx="43" cy="21" r="5" fill="#c9a6ff"/></svg>Luminart</a>
+    <button class="theme-toggle" type="button" aria-label="Toggle color theme">Dark</button>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <p class="product">Telemetrix</p>
+        <p class="kicker">Open Source (Apache 2.0) · Built in Rust · Windows 11 and Linux</p>
+        <h1>Your system, live, in about 8 MB.</h1>
+        <p class="lead">Telemetrix is a very light terminal screensaver and live system dashboard. It shows your CPU, memory, disks, GPU and temperatures, plus cards for exchange rates, crypto prices, weather and more. It uses almost no CPU on the static theme.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="https://github.com/OliverD25/telemetrix/releases/download/v0.4.0/telemetrix-v0.4.0-windows-x86_64.zip">Download for Windows</a>
+          <a class="btn" href="https://github.com/OliverD25/telemetrix/releases/download/v0.4.0/telemetrix-v0.4.0-linux-x86_64.tar.gz">Download for Linux</a>
+          <a class="btn" href="https://github.com/OliverD25/telemetrix" target="_blank" rel="noopener">View on GitHub →</a>
+        </div>
+        <p class="note">Unpack the zip and run <code>telemetrix.exe</code> from Windows Terminal. The file is not signed yet, so Windows warns once: click "More info", then "Run anyway". Or build it with Rust 1.95 or newer: <code>cargo install --git https://github.com/OliverD25/telemetrix</code></p>
+        <p class="meta">Version 0.4.0 · about 1.7 MB download · <a href="https://github.com/OliverD25/telemetrix/releases" target="_blank" rel="noopener">Release notes →</a></p>
+      </div>
+      <div class="badge" aria-hidden="true">&gt;_</div>
+    </section>
+    <section class="shot">
+      <h2 class="visually-hidden">Screenshot</h2>
+      <div class="window">
+        <img src="/images/hero.webp" alt="Telemetrix with the Matrix theme: CPU, RAM, swap, two GPUs, disks, clock, crypto and currency graphs, internet latency, a speed test and weather over digital rain" width="1600" height="1092" loading="eager">
+      </div>
+    </section>
+    <section class="section shows">
+      <p class="label">What it shows</p>
+      <h2>Every number you glance at, in one terminal</h2>
+      <p class="body">The core cards read your own computer. Plugin cards bring in outside data. The plugins need no account and no key. If a service does not answer, the card keeps its last values and marks them stale.</p>
+      <ul class="grid">
+        <li class="card">
+          <h3>System</h3>
+          <p>CPU, memory, swap, GPUs, disks, and CPU and GPU temperature where your computer reports it.</p>
+        </li>
+        <li class="card">
+          <h3>Markets</h3>
+          <p>Crypto prices from Binance. Currency rates from Monobank, PrivatBank and NBU. Graphs for 7 days, 30 days and 1 year.</p>
+        </li>
+        <li class="card">
+          <h3>Weather</h3>
+          <p>Now and two days ahead, from Open-Meteo (data under CC BY 4.0).</p>
+        </li>
+        <li class="card">
+          <h3>Network</h3>
+          <p>Latency to 1.1.1.1, measured with a TCP connect. A speed test every 30 minutes, or when you press <code>g</code>.</p>
+        </li>
+        <li class="card">
+          <h3>Clock and uptime</h3>
+          <p>The time, and how long the computer has been running.</p>
+        </li>
+        <li class="card">
+          <h3>Your own plugins</h3>
+          <p>Write a small Lua file and get a card for it. Each plugin has its own memory limit.</p>
+        </li>
+      </ul>
+    </section>
+    <section class="section themes-section">
+      <p class="label">Ten themes</p>
+      <h2>Ten themes, from quiet to cinematic</h2>
+      <ul class="themes">
+        <li><b>matrix</b>Digital rain. This is the default.</li>
+        <li><b>minimalist</b>Plain cards with little decoration.</li>
+        <li><b>tokyo-night</b>A calm dark palette.</li>
+        <li><b>crt-amber</b>An amber phosphor monitor.</li>
+        <li><b>cyberpunk</b>Neon colours on dark.</li>
+        <li><b>nasa</b>Mission control, static.</li>
+        <li><b>pip-boy</b>A green wrist computer, static.</li>
+        <li><b>synthwave</b>Retro purple and pink.</li>
+        <li><b>kernel-log</b>Your numbers as a scrolling boot log.</li>
+        <li><b>ascii-dashboard</b>A dashboard drawn with plain characters.</li>
+      </ul>
+    </section>
+    <section class="section small">
+      <p class="label">Built to stay small</p>
+      <h2>Light enough to leave running</h2>
+      <ul class="grid">
+        <li class="card">
+          <p><strong>Memory budgets:</strong> about 8 MB without plugins and about 12 MB with the seven default plugins. The core stays under 10 MB and the default setup under 14 MB. The status bar shows Telemetrix's own memory.</p>
+        </li>
+        <li class="card">
+          <p><strong>A settings file that cannot break:</strong> everything lives in a commented <code>telemetrix.toml</code>. A wrong value never breaks it.</p>
+        </li>
+        <li class="card">
+          <p><strong>Plugins that keep going:</strong> when a service is down, a card keeps its last values and marks them stale. No accounts or keys are needed.</p>
+        </li>
+        <li class="card">
+          <p><strong>Updates itself:</strong> <code>telemetrix update</code> gets the new version from GitHub Releases and checks the SHA-256 sums before it installs.</p>
+        </li>
+      </ul>
+    </section>
+    <section class="section code screensaver">
+      <p class="label">Screensaver</p>
+      <h2>Use it as a screensaver</h2>
+      <pre><code>telemetrix screensaver install --idle-minutes 10</code></pre>
+      <p class="body">On Windows, this opens Telemetrix full screen in Windows Terminal after 10 idle minutes. Any key closes it. On Linux, use swayidle or xautolock: see <a href="https://github.com/OliverD25/telemetrix#starting-it-automatically" target="_blank" rel="noopener">the README</a>.</p>
+    </section>
+    <section class="section code quickstart">
+      <p class="label">Quick start</p>
+      <h2>Four commands</h2>
+      <pre><code>telemetrix                       # the dashboard
+telemetrix --exit-on-any-key     # screensaver mode
+telemetrix snapshot              # print the numbers once
+telemetrix screensaver install   # start it after idle time (Windows)</code></pre>
+      <p class="body">Keys: <code>t</code> theme, <code>s</code> settings, <code>l</code> log, <code>?</code> all keys, <code>q</code> quit. Every change is saved at once.</p>
+    </section>
+  </main>
+  <footer>
+    <span class="copyright">© 2026 Luminart</span>
+    <div class="links">
+      <a href="mailto:redrickcarter39@gmail.com">redrickcarter39@gmail.com</a>
+      <a href="https://luminart.app/">luminart.app</a>
+      <a href="https://github.com/OliverD25" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </footer>
+</div>
+<script>
+  {
+    const root = document.documentElement;
+    const toggle = document.querySelector('.theme-toggle');
+    const showLabel = () => {
+      toggle.textContent = root.dataset.theme === 'light' ? 'Light' : 'Dark';
+    };
+    toggle.addEventListener('click', () => {
+      const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+      if (next === 'light') root.dataset.theme = 'light';
+      else delete root.dataset.theme;
+      document.querySelector('meta[name="theme-color"]').content = next === 'light' ? '#f6f5f8' : '#0c0b10';
+      try { localStorage.setItem('luminart-theme', next); } catch {}
+      showLabel();
+    });
+    showLabel();
+  }
+</script>
+</body>
+</html>
