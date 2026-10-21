@@ -11,4 +11,4 @@ highlights:
 
 ### Notices that were dropped
 
-When WinCraft was busy at the moment a plugin sent a notice, a tooltip, a prompt or an Arrange strip request, the request was dropped and never shown. WinCraft now tries again after a moment. The tray icon and the palette hotkey are delivered again in the same way.
+When WinCraft was busy at the moment a plugin sent a notice, a tooltip, a prompt or an Arrange strip request, the request was dropped and never shown. WinCraft now tries again after a moment. Clicks on the tray icon and presses of the palette hotkey are no longer lost in the same situation.
