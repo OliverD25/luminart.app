@@ -43,7 +43,7 @@ Log in to Cloudflare once with `npx wrangler login`. Then:
 ```bash
 npm run deploy             # main site: luminart.app
 npm run deploy:www         # www.luminart.app sends visitors to luminart.app (301)
-npm run deploy:telemetrix  # telemetrix.luminart.app sends visitors to the GitHub repo (302)
+npm run deploy:telemetrix  # the Telemetrix page (see "Product pages")
 npm run deploy:cabinetos   # the CabinetOS page (see "Product pages")
 npm run deploy:wincraft    # the WinCraft page (see "Product pages")
 npm run deploy:all         # all five, one after another
@@ -113,7 +113,7 @@ Its settings are variables in [redirects/wrangler.jsonc](redirects/wrangler.json
 
 To add `prism.luminart.app`:
 
-1. In `redirects/wrangler.jsonc`, copy the `telemetrix` block to a new `prism` block. Set the name
+1. In `redirects/wrangler.jsonc`, copy the `www` block to a new `prism` block. Set the name
    to `luminart-prism`, the route pattern to `prism.luminart.app`, and the variables.
 2. In `package.json`, add `"deploy:prism": "wrangler deploy -c redirects/wrangler.jsonc -e prism"`
    and add it to `deploy:all`.
@@ -121,7 +121,9 @@ To add `prism.luminart.app`:
 4. Run `npm run deploy:prism`, then `npm run verify`.
 
 When the product gets a real site, deploy that site as a Worker with the same name
-(`luminart-prism`) and the same custom domain. It replaces the redirect.
+(`luminart-prism`) and the same custom domain. It replaces the redirect. This is how
+`telemetrix.luminart.app` went from a redirect to its own page; its redirect block is gone from
+`redirects/wrangler.jsonc`.
 
 ## Product pages
 
@@ -132,6 +134,12 @@ release notes (`npm run dev:wincraft` serves it at http://localhost:8789, `npm r
 publishes it). Its download button points at `releases/latest/download/wincraft.exe`, so a new
 WinCraft release needs only the version line on the page changed. Its screenshots were taken from
 the running app; the originals are in `../_io/wincraft-screenshots/`.
+`sites/telemetrix/` is the third: the same pattern with one screenshot (`npm run dev:telemetrix` serves
+it at http://localhost:8790, `npm run deploy:telemetrix` publishes it). It keeps the Worker name
+`luminart-telemetrix` of the old redirect, so deploying it replaces the redirect and takes over
+`telemetrix.luminart.app`. Its download buttons name a version (`v0.4.0`) because the releases have no
+stable "latest" file name: on a new release, change both links and the version line on the page. It has
+no app icon, so the hero shows a `>_` badge and the favicon is the Luminart mark.
 
 - `public/` holds plain files: HTML, `page.css`, icons, `404.html`, `robots.txt`, `sitemap.xml` and
   its own `_headers`. Cloudflare serves the folder as it is. The only generated part is

@@ -16,11 +16,12 @@ Colors, type, spacing and breakpoints there are final; product data is not.
 - `scripts/build.mjs` — renders `dist/`. wrangler runs it before every deploy
   and every `wrangler dev`, so `dist/` is never edited by hand.
 - `redirects/` — one script and one config with a wrangler environment per
-  redirect-only hostname (`www`, `telemetrix`). Each is its own Worker named
+  redirect-only hostname (`www` today). Each is its own Worker named
   `luminart-<label>`.
 - `scripts/verify.mjs` — live checks after a deploy (`npm run verify`).
 - `sites/<label>/` — one static product page each (own Worker `luminart-<label>`, no build
-  step). `cabinetos` and `wincraft` (port 8789, no release notes) are live. How to add one, and the two-step go-live: README,
+  step). `cabinetos` and `wincraft` (port 8789, no release notes) are live. `telemetrix` (port 8790) is built
+  but not yet deployed: deploying it replaces the old redirect; its download links name v0.4.0. How to add one, and the two-step go-live: README,
   "Product pages". Screenshots are prepared with `scripts/prep-shots.py`.
   CabinetOS release notes (`sites/cabinetos/releases/<version>/notes.md`) are built into
   `public/releases/` by `npm run build:releases`: README, "Release notes". Never edit that folder.
@@ -33,10 +34,11 @@ Colors, type, spacing and breakpoints there are final; product data is not.
   the user asked for a publish in this chat.
 - `npm run dev` serves the built site at http://localhost:8787/. Use `localhost`,
   never `127.0.0.1`. Port 8080 is taken on this PC.
-- The Telemetrix card's terminal render depends on a ten-glyph JetBrains Mono
-  subset linked in `src/template.html`, because DM Mono has no box-drawing
-  glyphs. A new text render that uses other box characters must add them to
-  that link's `text=` list, or Windows draws them at the wrong width.
+- The JetBrains Mono subset linked in `src/template.html` only served the old
+  Telemetrix text render (the card is an image now). It matters again only if a
+  text render returns: DM Mono has no box-drawing glyphs, so such a render must
+  list its box characters in that link's `text=` list, or Windows draws them at
+  the wrong width.
 - Look at a visual change before publishing it (global skill
   `local-site-screenshot`). Screenshots go to `.screenshots/` (gitignored).
 - Never commit `dist/`, `node_modules/`, `.screenshots/` or anything from `_io`.
