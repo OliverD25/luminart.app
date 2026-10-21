@@ -37,6 +37,19 @@
         "8789"
       ],
       "port": 8789
+    },
+    {
+      "name": "telemetrix",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": [
+        "wrangler",
+        "dev",
+        "-c",
+        "sites/telemetrix/wrangler.jsonc",
+        "--port",
+        "8790"
+      ],
+      "port": 8790
     }
   ]
 }

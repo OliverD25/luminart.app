@@ -1,7 +1,7 @@
 // Post-deploy checks. With a base URL argument (for example a preview URL), only two checks run
 // against that base: the home page and a missing page. The cabinetos site passes the same two
-// checks, and so does the wincraft site, so `node scripts/verify.mjs <url>` also works for a preview
-// of either. That is why the home page may then carry any of the three titles.
+// checks, and so do the wincraft and telemetrix sites, so `node scripts/verify.mjs <url>` also works
+// for a preview of any of them. That is why the home page may then carry any of the four titles.
 const base = process.argv[2]?.replace(/\/+$/, '');
 const site = base ?? 'https://luminart.app';
 
@@ -9,7 +9,7 @@ const checks = [
   {
     url: `${site}/`,
     status: 200,
-    body: base ? ['<title>Luminart</title>', '<title>CabinetOS', '<title>WinCraft'] : '<title>Luminart</title>',
+    body: base ? ['<title>Luminart</title>', '<title>CabinetOS', '<title>WinCraft', '<title>Telemetrix'] :'<title>Luminart</title>',
     headers: { 'x-content-type-options': 'nosniff' },
   },
   { url: `${site}/this-page-does-not-exist`, status: 404 },
@@ -17,7 +17,8 @@ const checks = [
 if (!base) {
   checks.push(
     { url: 'https://www.luminart.app/a/b?c=1', status: 301, headers: { location: 'https://luminart.app/a/b?c=1' } },
-    { url: 'https://telemetrix.luminart.app/', status: 302, headers: { location: 'https://github.com/OliverD25/telemetrix' } },
+    { url: 'https://telemetrix.luminart.app/', status: 200, body: '<title>Telemetrix', headers: { 'x-content-type-options': 'nosniff' } },
+    { url: 'https://telemetrix.luminart.app/this-page-does-not-exist', status: 404 },
     { url: 'https://cabinetos.luminart.app/', status: 200, body: '<title>CabinetOS', headers: { 'x-content-type-options': 'nosniff' } },
     { url: 'https://cabinetos.luminart.app/this-page-does-not-exist', status: 404 },
     { url: 'https://cabinetos.luminart.app/releases/', status: 200, body: '<title>Releases' },
