@@ -39,6 +39,9 @@ Colors, type, spacing and breakpoints there are final; product data is not.
   text render returns: DM Mono has no box-drawing glyphs, so such a render must
   list its box characters in that link's `text=` list, or Windows draws them at
   the wrong width.
+- A product page whose repository is public links to it from the hero, next to
+  the download button ("View on GitHub" or "Source on GitHub"). The creator's
+  rule of 2026-10-21. A private repository gets no link.
 - Look at a visual change before publishing it (global skill
   `local-site-screenshot`). Screenshots go to `.screenshots/` (gitignored).
 - Never commit `dist/`, `node_modules/`, `.screenshots/` or anything from `_io`.
