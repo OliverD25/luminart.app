@@ -49,7 +49,10 @@ if not (input_dir / hero_file).exists():
     sys.exit(f"{hero_file} is not in {input_dir}")
 
 for src in sources:
-    image = Image.open(src).convert("RGB")
+    image = Image.open(src).convert("RGBA")
+    # Window shots with round transparent corners keep their alpha; everything else is plain RGB.
+    if image.getchannel("A").getextrema()[0] == 255:
+        image = image.convert("RGB")
     is_hero = src.name == hero_file
     # The output name drops a leading "01-" style number, so 01-dual-pane.png becomes dual-pane.webp.
     stem = "hero" if is_hero else src.stem.split("-", 1)[-1] if src.stem[:2].isdigit() else src.stem
