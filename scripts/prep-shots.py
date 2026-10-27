@@ -65,8 +65,10 @@ for src in sources:
         card.save(out, "WEBP", quality=82, method=6)
         report(out, card)
 
-        og = scaled(image, 1200)
-        og = og.crop((0, 0, 1200, min(630, og.size[1])))
+        # Always exactly 1200 wide (scaled up if the hero is smaller), then 630 from the middle.
+        og = image.resize((1200, round(image.size[1] * 1200 / image.size[0])), Image.LANCZOS)
+        top = max(0, (og.size[1] - 630) // 2)
+        og = og.crop((0, top, 1200, top + min(630, og.size[1])))
         out = page_images / "og.jpg"
         og.save(out, "JPEG", quality=88, optimize=True)
         report(out, og)

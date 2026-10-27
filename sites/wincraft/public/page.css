@@ -283,6 +283,7 @@ td:nth-child(2) { color: var(--text); white-space: nowrap; }
 .card h3 { margin: 0 0 8px; font-size: 16px; font-weight: 500; }
 .card h3 span { color: var(--muted); font-weight: 400; }
 .plugins .card:first-child { grid-column: 1 / -1; }
+.card kbd { font-size: 11px; }
 .card strong { color: var(--text); font-weight: 500; }
 
 .card p {
@@ -320,7 +321,46 @@ code {
   font-family: 'DM Mono', monospace;
   font-size: 13px;
 }
-.label code { font-size: 12px; }
+kbd {
+  padding: 1px 6px 2px;
+  border: 1px solid var(--line);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  background: var(--panel);
+  color: var(--text);
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.label code, .label kbd { font-size: 12px; }
+
+.lead strong { color: var(--text); font-weight: 500; }
+.section .body strong, .points strong { color: var(--text); font-weight: 500; }
+
+.sub { margin: 0 0 12px; font-size: 16px; font-weight: 500; }
+.points {
+  max-width: 680px;
+  margin: 0 0 32px;
+  padding-left: 20px;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+.points li + li { margin-top: 10px; }
+.ok { color: var(--accent); }
+.warn { color: #d9a441; }
+
+.fig { margin: 0 0 32px; }
+.fig-after { margin: 16px 0 0; }
+.fig figcaption {
+  margin-top: 10px;
+  font-family: 'DM Mono', monospace;
+  font-size: 12px;
+  color: var(--faint);
+}
+td strong { font-weight: 500; }
+.why-grid .card:last-child { grid-column: 1 / -1; }
 .meta a, .note a { text-decoration: underline; text-underline-offset: 2px; }
 
 footer {

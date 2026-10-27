@@ -11,9 +11,9 @@
     "name": "WinCraft",
     "subdomain": "wincraft.luminart.app",
     "href": "https://wincraft.luminart.app",
-    "description": "The single-executable Windows 11 power suite: an instant command palette, multi-monitor layout recovery and hardware display control in one tiny Rust binary.",
+    "description": "The single-executable Windows 11 power suite: an instant command palette with a live inspector, window management and display control in one tiny Rust binary.",
     "cta": "Open WinCraft →",
-    "screenshot": { "type": "image", "src": "/images/wincraft.webp", "alt": "The WinCraft command palette listing its commands" }
+    "screenshot": { "type": "image", "src": "/images/wincraft.webp", "alt": "The WinCraft command palette in the Fluent glass theme" }
   },
   {
     "name": "Telemetrix",
