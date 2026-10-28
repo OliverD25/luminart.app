@@ -29,7 +29,7 @@ if (!base) {
     { url: 'https://wincraft.luminart.app/', status: 200, body: '<title>WinCraft', headers: { 'x-content-type-options': 'nosniff' } },
     { url: 'https://wincraft.luminart.app/this-page-does-not-exist', status: 404 },
     { url: 'https://wincraft.luminart.app/releases/', status: 200, body: '<title>Releases' },
-    { url: 'https://wincraft.luminart.app/releases/0.20.37/', status: 200, body: "What's new in 0.20.37" },
+    { url: 'https://wincraft.luminart.app/releases/0.20.69/', status: 200, body: "What's new in 0.20.69" },
   );
 }
 
