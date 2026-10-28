@@ -11,7 +11,7 @@
     "name": "WinCraft",
     "subdomain": "wincraft.luminart.app",
     "href": "https://wincraft.luminart.app",
-    "description": "The single-executable Windows 11 power suite: an instant command palette with a live inspector, window management and display control in one tiny Rust binary.",
+    "description": "The single-executable Windows 11 power suite built for multi-monitor setups: visual window management, reboot-proof layout memory, hardware display controls and an instant command palette in one tiny Rust binary.",
     "cta": "Open WinCraft →",
     "screenshot": { "type": "image", "src": "/images/wincraft.webp", "alt": "The WinCraft command palette in the Fluent glass theme" }
   },
